@@ -43,27 +43,3 @@ void sendNotification(
       Colors.white,
       textColor: Colors.black,
     );
-
-void sendErrorNotification(
-  BuildContext context,
-  String message, {
-  String title = "Error",
-}) =>
-    notification(
-      context,
-      title,
-      message,
-      Colors.red,
-    );
-
-void sendSuccessNotification(
-  BuildContext context,
-  String message, {
-  String title = "Success",
-}) =>
-    notification(
-      context,
-      title,
-      message,
-      Colors.green,
-    );
