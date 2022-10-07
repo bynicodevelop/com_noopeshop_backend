@@ -2,9 +2,19 @@ import "package:com_noopeshop_backend/services/users/list_user/list_user_bloc.da
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-class UserListScreen extends StatelessWidget {
-  const UserListScreen({super.key});
+class UserListScreen extends StatefulWidget {
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
+  const UserListScreen({
+    super.key,
+    required this.scaffoldKey,
+  });
+
+  @override
+  State<UserListScreen> createState() => _UserListScreenState();
+}
+
+class _UserListScreenState extends State<UserListScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -13,7 +23,7 @@ class UserListScreen extends StatelessWidget {
           children: [
             const Spacer(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => widget.scaffoldKey.currentState!.openEndDrawer(),
               child: const Text("Add User"),
             ),
           ],

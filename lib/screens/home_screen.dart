@@ -1,4 +1,6 @@
+import "package:com_noopeshop_backend/components/forms/generator_form_component.dart";
 import "package:com_noopeshop_backend/components/sidebar/menu_sidebar_component.dart";
+import "package:com_noopeshop_backend/config/constants.dart";
 import "package:com_noopeshop_backend/screens/user_list_screen.dart";
 import "package:flutter/material.dart";
 
@@ -12,25 +14,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: const Drawer(
+        width: 500.0,
+        child: Padding(
+          padding: EdgeInsets.all(
+            kDefaultPadding,
+          ),
+          child: FormGeneratorComponent(),
+        ),
+      ),
       body: Row(
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             height: double.infinity,
             width: 300,
             child: MenuSidebasComponent(),
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: UserListScreen(),
+              padding: const EdgeInsets.all(8.0),
+              child: UserListScreen(
+                scaffoldKey: _scaffoldKey,
+              ),
             ),
           ),
         ],
