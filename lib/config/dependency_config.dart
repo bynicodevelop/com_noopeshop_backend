@@ -1,12 +1,8 @@
-import "dart:io";
-
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:cloud_functions/cloud_functions.dart";
 import "package:com_noopeshop_backend/config/firebase_config.dart";
-import "package:com_noopeshop_backend/firebase_options.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
 import "package:firebase_auth/firebase_auth.dart";
-import "package:firebase_core/firebase_core.dart";
 import "package:firebase_storage/firebase_storage.dart";
 import "package:get_it/get_it.dart";
 import "package:injectable/injectable.dart";
