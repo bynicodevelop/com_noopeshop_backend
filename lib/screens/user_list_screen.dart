@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class UserListScreen extends StatelessWidget {
   const UserListScreen({super.key});
@@ -12,7 +12,7 @@ class UserListScreen extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               onPressed: () {},
-              child: const Text('Add User'),
+              child: const Text("Add User"),
             ),
           ],
         ),

@@ -47,6 +47,8 @@ dependencies:
   another_flushbar: ^1.12.29
   injectable: ^1.5.3
   get_it: ^7.2.0
+  desktop_drop: ^0.3.3
+  dotted_border: ^2.0.0+2
   
 
 dev_dependencies:

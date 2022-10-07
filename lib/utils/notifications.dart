@@ -2,13 +2,13 @@ import "package:another_flushbar/flushbar.dart";
 import "package:com_noopeshop_backend/config/constants.dart";
 import "package:flutter/material.dart";
 
-void notification(
+Future<void> notification(
   BuildContext context,
   String? title,
   String message,
   Color color, {
   textColor = Colors.white,
-}) =>
+}) async =>
     Flushbar(
       title: title,
       titleColor: textColor,
@@ -32,10 +32,10 @@ void notification(
           3,
     ).show(context);
 
-void sendNotification(
+Future<void> sendNotification(
   BuildContext context,
   String message,
-) =>
+) async =>
     notification(
       context,
       null,

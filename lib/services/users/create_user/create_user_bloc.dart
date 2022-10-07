@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import "package:bloc/bloc.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
 import "package:equatable/equatable.dart";
