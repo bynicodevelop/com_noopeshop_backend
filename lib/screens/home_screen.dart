@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: const Drawer(
+        width: 500.0,
         child: Padding(
           padding: EdgeInsets.all(
             kDefaultPadding,
