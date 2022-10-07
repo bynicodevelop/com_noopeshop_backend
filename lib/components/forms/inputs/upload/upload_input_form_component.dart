@@ -38,7 +38,7 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
             setState(() => _isDragOver = !_isDragOver);
           },
           onDragDone: (details) {
-            setState(() => _isDragOver = !_isDragOver);
+            setState(() => _isDragOver = false);
 
             _files.addAll(details.files);
           },
