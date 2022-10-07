@@ -1,5 +1,6 @@
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
 import "package:com_noopeshop_backend/services/users/create_user/create_user_bloc.dart";
+import "package:com_noopeshop_backend/services/users/list_user/list_user_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -21,6 +22,11 @@ class ServiceFactory extends StatelessWidget {
       providers: [
         BlocProvider<CreateUserBloc>(
           create: (context) => CreateUserBloc(
+            userRepository,
+          ),
+        ),
+        BlocProvider<ListUserBloc>(
+          create: (context) => ListUserBloc(
             userRepository,
           ),
         ),

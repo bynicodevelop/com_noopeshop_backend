@@ -1,5 +1,6 @@
 import "package:com_noopeshop_backend/components/forms/generator_form_component.dart";
 import "package:com_noopeshop_backend/components/sidebar/menu_sidebar_component.dart";
+import "package:com_noopeshop_backend/config/constants.dart";
 import "package:com_noopeshop_backend/screens/user_list_screen.dart";
 import "package:flutter/material.dart";
 
@@ -20,7 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: const Drawer(
-        child: FormGeneratorComponent(),
+        child: Padding(
+          padding: EdgeInsets.all(
+            kDefaultPadding,
+          ),
+          child: FormGeneratorComponent(),
+        ),
       ),
       body: Row(
         children: [
