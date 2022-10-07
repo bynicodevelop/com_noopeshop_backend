@@ -11,7 +11,17 @@ class UserRepository {
 
   Future<void> get() async {}
 
-  Future<void> list() async {}
+  Future<List<Map<String, dynamic>>> list() async {
+    final HttpsCallable httpsCallable =
+        firebaseFunctions.httpsCallable("listUser");
+
+    final HttpsCallableResult<List<dynamic>> httpsCallableResult =
+        await httpsCallable.call<List<dynamic>>();
+
+    return httpsCallableResult.data
+        .map((e) => Map<String, dynamic>.from(e))
+        .toList();
+  }
 
   Future<void> create(
     Map<String, dynamic> data,
