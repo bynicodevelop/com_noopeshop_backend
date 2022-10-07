@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class MenuSidebasComponent extends StatelessWidget {
   const MenuSidebasComponent({super.key});
@@ -10,7 +10,7 @@ class MenuSidebasComponent extends StatelessWidget {
       children: [
         ListTile(
           onTap: () {},
-          title: const Text('Users'),
+          title: const Text("Users"),
           leading: const Icon(Icons.people),
         ),
       ],

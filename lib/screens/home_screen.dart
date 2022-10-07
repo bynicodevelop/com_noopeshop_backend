@@ -1,3 +1,4 @@
+import "package:com_noopeshop_backend/components/forms/inputs/upload/upload_input_form_component.dart";
 import "package:com_noopeshop_backend/components/sidebar/menu_sidebar_component.dart";
 import "package:flutter/material.dart";
 
@@ -20,14 +21,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
-        children: [
-          const SizedBox(
+        children: const [
+          SizedBox(
             height: double.infinity,
             width: 300,
             child: MenuSidebasComponent(),
           ),
           Expanded(
-            child: Container(),
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: UploadInputFormComponent(),
+            ),
           ),
         ],
       ),

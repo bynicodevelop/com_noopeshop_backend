@@ -12,7 +12,7 @@ class FormGeneratorComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final FormGenerator formGenerator = FormGenerator(
       formData: userForm,
-      onError: () {
+      onError: () async {
         sendNotification(
           context,
           "Please fill all the fields",
