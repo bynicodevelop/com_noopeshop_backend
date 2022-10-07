@@ -12,7 +12,7 @@ void main() {
       final FirebaseFunctions firebaseFunctions = MockFirebaseFunctions();
 
       final MockHttpsCallableResult mockHttpsCallableResult =
-          MockHttpsCallableResult();
+          MockHttpsCallableResult<dynamic>();
 
       final HttpsCallable httpsCallable = MockHttpsCallable();
 
@@ -23,8 +23,8 @@ void main() {
         return mockHttpsCallableResult;
       });
 
-      when(mockHttpsCallableResult.data).thenReturn(<Map<String, dynamic>>[
-        <String, dynamic>{
+      when(mockHttpsCallableResult.data).thenReturn([
+        {
           "id": "1",
           "email": "john@domain.tld",
           "displayName": "John Doe",
@@ -62,7 +62,7 @@ void main() {
         return mockHttpsCallableResult;
       });
 
-      when(mockHttpsCallableResult.data).thenReturn(<Map<String, dynamic>>[]);
+      when(mockHttpsCallableResult.data).thenReturn([]);
 
       final UserRepository userRepository = UserRepository(
         firebaseFunctions,

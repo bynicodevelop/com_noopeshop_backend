@@ -15,10 +15,9 @@ class UserRepository {
     final HttpsCallable httpsCallable =
         firebaseFunctions.httpsCallable("listUser");
 
-    final HttpsCallableResult<List<dynamic>> httpsCallableResult =
-        await httpsCallable.call<List<dynamic>>();
+    final HttpsCallableResult httpsCallableResult = await httpsCallable.call();
 
-    return httpsCallableResult.data
+    return (httpsCallableResult.data as List<dynamic>)
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
   }
