@@ -1,13 +1,14 @@
+import "package:com_noopeshop_backend/config/constants.dart";
 import "package:com_noopeshop_backend/services/users/list_user/list_user_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class UserListScreen extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final String title;
 
   const UserListScreen({
     super.key,
-    required this.scaffoldKey,
+    this.title = "User List",
   });
 
   @override
@@ -19,14 +20,20 @@ class _UserListScreenState extends State<UserListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            const Spacer(),
-            ElevatedButton(
-              onPressed: () => widget.scaffoldKey.currentState!.openEndDrawer(),
-              child: const Text("Add User"),
-            ),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(
+            top: kDefaultPadding,
+            left: kDefaultPadding,
+            bottom: kDefaultPadding,
+          ),
+          child: Row(
+            children: [
+              Text(
+                widget.title,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ],
+          ),
         ),
         BlocBuilder<ListUserBloc, ListUserState>(
           bloc: context.read<ListUserBloc>()..add(OnListUserEvent()),

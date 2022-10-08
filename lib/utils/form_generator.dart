@@ -30,10 +30,7 @@ class FormGenerator {
       Widget widget = inputs[data["field_type"]]?.call(
         _controllers[data["data_model"]],
         data["label"],
-        hasError: (value) => _errors.putIfAbsent(
-          data["data_model"],
-          () => value,
-        ),
+        hasError: (value) => _errors[data["data_model"]] = value,
       ) as Widget;
 
       _widgets.add(
