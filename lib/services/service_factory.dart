@@ -5,8 +5,6 @@ import "package:com_noopeshop_backend/services/commons/create_common/create_comm
 import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
-import "package:com_noopeshop_backend/services/users/create_user/create_user_bloc.dart";
-import "package:com_noopeshop_backend/services/users/list_user/list_user_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -33,16 +31,6 @@ class ServiceFactory extends StatelessWidget {
             menuFactory.firstWhere(
               (element) => element["default"] == true,
             ),
-          ),
-        ),
-        BlocProvider<CreateUserBloc>(
-          create: (context) => CreateUserBloc(
-            userRepository,
-          ),
-        ),
-        BlocProvider<ListUserBloc>(
-          create: (context) => ListUserBloc(
-            userRepository,
           ),
         ),
         BlocProvider<DeleteCommonBloc>(

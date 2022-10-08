@@ -14,7 +14,7 @@ class ListCommonBloc extends Bloc<ListCommonEvent, ListCommonState> {
   ) : super(const ListCommonInitialState()) {
     on<OnListCommonEvent>((event, emit) async {
       Map<String, dynamic> result = await commonRepository.list(
-        event.formData,
+        event.form,
       );
 
       emit(ListCommonInitialState(

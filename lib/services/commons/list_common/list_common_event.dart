@@ -8,14 +8,14 @@ abstract class ListCommonEvent extends Equatable {
 }
 
 class OnListCommonEvent extends ListCommonEvent {
-  final Map<String, dynamic> formData;
+  final Map<String, dynamic> form;
 
   const OnListCommonEvent({
-    required this.formData,
+    required this.form,
   });
 
   @override
   List<Object> get props => [
-        formData,
+        form,
       ];
 }

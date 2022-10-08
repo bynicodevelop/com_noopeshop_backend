@@ -1,5 +1,4 @@
 import "package:com_noopeshop_backend/config/constants.dart";
-import "package:com_noopeshop_backend/screens/commons/details_screen.dart";
 import "package:com_noopeshop_backend/screens/commons/edit_screen.dart";
 import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
@@ -10,11 +9,11 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:show_confirm_modal/show_confirm_modal.dart";
 
 class CommonListScreen extends StatelessWidget {
-  final Map<String, dynamic> formData;
+  final Map<String, dynamic> form;
 
   const CommonListScreen({
     super.key,
-    required this.formData,
+    required this.form,
   });
 
   IconButton _buildIconButton({
@@ -39,15 +38,7 @@ class CommonListScreen extends StatelessWidget {
   ) {
     return _buildIconButton(
       icon: Icons.open_in_new_outlined,
-      onPressed: () async => Navigator.push(
-        context,
-        MaterialPageRouteWithoutAnimation(
-          builder: (context) => CommonDetailsScreen(
-            form: formData,
-            data: data,
-          ),
-        ),
-      ),
+      onPressed: () async => {},
     );
   }
 
@@ -61,7 +52,7 @@ class CommonListScreen extends StatelessWidget {
         context,
         MaterialPageRouteWithoutAnimation(
           builder: (context) => CommonEditScreen(
-            form: formData,
+            form: form,
             data: data,
           ),
         ),
@@ -78,7 +69,7 @@ class CommonListScreen extends StatelessWidget {
           if (state is DeleteCommonSuccessState) {
             context.read<ListCommonBloc>().add(
                   OnListCommonEvent(
-                    formData: formData,
+                    form: form,
                   ),
                 );
 
@@ -95,7 +86,7 @@ class CommonListScreen extends StatelessWidget {
             onCancel: () => {},
             onConfirm: () => context.read<DeleteCommonBloc>().add(
                   OnDeleteCommonEvent(
-                    form: formData,
+                    form: form,
                     data: data,
                   ),
                 ),
@@ -107,7 +98,7 @@ class CommonListScreen extends StatelessWidget {
   List<DataColumn> _headerTable(
     BuildContext context,
   ) =>
-      List<Map<String, dynamic>>.from(formData["table"])
+      List<Map<String, dynamic>>.from(form["table"])
           .map((Map<String, dynamic> table) {
         return DataColumn(
           label: Text(
@@ -140,7 +131,7 @@ class CommonListScreen extends StatelessWidget {
     List<Map<String, dynamic>> list,
   ) {
     List<Map<String, dynamic>> tableCols =
-        List<Map<String, dynamic>>.from(formData["table"]);
+        List<Map<String, dynamic>>.from(form["table"]);
 
     List<DataRow> rows = list.map((Map<String, dynamic> item) {
       return DataRow(
@@ -202,7 +193,7 @@ class CommonListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (formData.isEmpty) {
+    if (form.isEmpty) {
       return const Scaffold(
         body: Center(
           child: Text("No data"),
@@ -213,7 +204,7 @@ class CommonListScreen extends StatelessWidget {
     return BlocBuilder<ListCommonBloc, ListCommonState>(
       bloc: context.read<ListCommonBloc>()
         ..add(OnListCommonEvent(
-          formData: formData,
+          form: form,
         )),
       builder: (context, state) {
         final List<Map<String, dynamic>> list =
