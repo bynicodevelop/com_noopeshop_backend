@@ -1,9 +1,7 @@
 import "package:com_noopeshop_backend/config/constants.dart";
-import "package:com_noopeshop_backend/screens/commons/edit_screen.dart";
 import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/navigation_common/navigation_common_bloc.dart";
-import "package:com_noopeshop_backend/utils/material_page_route_without_animation.dart";
 import "package:com_noopeshop_backend/utils/notifications.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -54,15 +52,12 @@ class CommonListScreen extends StatelessWidget {
   ) {
     return _buildIconButton(
       icon: Icons.edit,
-      onPressed: () async => Navigator.push(
-        context,
-        MaterialPageRouteWithoutAnimation(
-          builder: (context) => CommonEditScreen(
-            form: form,
-            data: data,
+      onPressed: () async => context.read<NavigationCommonBloc>().add(
+            OnNavigationCommonEvent(
+              screenName: "edit",
+              data: data,
+            ),
           ),
-        ),
-      ),
     );
   }
 

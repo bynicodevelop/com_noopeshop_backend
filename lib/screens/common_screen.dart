@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/screens/commons/details_screen.dart";
+import "package:com_noopeshop_backend/screens/commons/edit_screen.dart";
 import "package:com_noopeshop_backend/screens/commons/list_screen.dart";
 import "package:com_noopeshop_backend/services/commons/navigation_common/navigation_common_bloc.dart";
 import "package:flutter/material.dart";
@@ -42,6 +43,9 @@ class _CommonScreenState extends State<CommonScreen> {
             form: widget.form,
           ),
           CommonDetailsScreen(
+            form: widget.form,
+          ),
+          CommonEditScreen(
             form: widget.form,
           )
         ],
