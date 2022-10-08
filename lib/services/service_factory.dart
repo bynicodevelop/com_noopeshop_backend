@@ -1,4 +1,6 @@
+import "package:com_noopeshop_backend/config/menu_factory.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
+import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
 import "package:com_noopeshop_backend/services/users/create_user/create_user_bloc.dart";
 import "package:com_noopeshop_backend/services/users/list_user/list_user_bloc.dart";
 import "package:flutter/material.dart";
@@ -20,6 +22,13 @@ class ServiceFactory extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ClickMenuBloc>(
+          create: (context) => ClickMenuBloc(
+            menuFactory.firstWhere(
+              (element) => element["default"] == true,
+            ),
+          ),
+        ),
         BlocProvider<CreateUserBloc>(
           create: (context) => CreateUserBloc(
             userRepository,
