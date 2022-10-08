@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/config/constants.dart";
+import "package:com_noopeshop_backend/screens/commons/details_screen.dart";
 import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
 import "package:com_noopeshop_backend/utils/notifications.dart";
@@ -22,7 +23,15 @@ class CommonListScreen extends StatelessWidget {
       splashRadius: kDefaultPadding * 1.4,
       iconSize: kDefaultPadding,
       icon: const Icon(Icons.open_in_new_outlined),
-      onPressed: () {},
+      onPressed: () async => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailsScreen(
+            form: formData,
+            data: data,
+          ),
+        ),
+      ),
     );
   }
 
@@ -65,7 +74,7 @@ class CommonListScreen extends StatelessWidget {
             onConfirm: () => context.read<DeleteCommonBloc>().add(
                   OnDeleteCommonEvent(
                     form: formData,
-                    formData: data,
+                    data: data,
                   ),
                 ),
           ),

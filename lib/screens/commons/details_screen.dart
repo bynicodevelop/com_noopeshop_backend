@@ -1,11 +1,21 @@
-import "package:flutter/src/widgets/container.dart";
-import "package:flutter/src/widgets/framework.dart";
+import "package:flutter/material.dart";
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final Map<String, dynamic> form;
+  final Map<String, dynamic> data;
+
+  const DetailsScreen({
+    super.key,
+    required this.form,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Details"),
+      ),
+    );
   }
 }

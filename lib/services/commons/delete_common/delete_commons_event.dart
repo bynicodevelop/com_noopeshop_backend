@@ -9,16 +9,16 @@ abstract class DeleteCommonEvent extends Equatable {
 
 class OnDeleteCommonEvent extends DeleteCommonEvent {
   final Map<String, dynamic> form;
-  final Map<String, dynamic> formData;
+  final Map<String, dynamic> data;
 
   const OnDeleteCommonEvent({
     required this.form,
-    required this.formData,
+    required this.data,
   });
 
   @override
   List<Object> get props => [
         form,
-        formData,
+        data,
       ];
 }
