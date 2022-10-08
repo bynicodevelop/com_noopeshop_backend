@@ -1,5 +1,6 @@
 import "package:com_noopeshop_backend/config/constants.dart";
 import "package:com_noopeshop_backend/screens/commons/details_screen.dart";
+import "package:com_noopeshop_backend/screens/commons/edit_screen.dart";
 import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
 import "package:com_noopeshop_backend/utils/material_page_route_without_animation.dart";
@@ -16,18 +17,32 @@ class CommonListScreen extends StatelessWidget {
     required this.formData,
   });
 
+  IconButton _buildIconButton({
+    required IconData icon,
+    required VoidCallback onPressed,
+    Color color = Colors.black87,
+  }) {
+    return IconButton(
+      splashRadius: kDefaultPadding * 1.4,
+      iconSize: kDefaultPadding,
+      icon: Icon(
+        icon,
+        color: color,
+      ),
+      onPressed: onPressed,
+    );
+  }
+
   Widget _detailsButton(
     BuildContext context,
     Map<String, dynamic> data,
   ) {
-    return IconButton(
-      splashRadius: kDefaultPadding * 1.4,
-      iconSize: kDefaultPadding,
-      icon: const Icon(Icons.open_in_new_outlined),
+    return _buildIconButton(
+      icon: Icons.open_in_new_outlined,
       onPressed: () async => Navigator.push(
         context,
         MaterialPageRouteWithoutAnimation(
-          builder: (context) => DetailsScreen(
+          builder: (context) => CommonDetailsScreen(
             form: formData,
             data: data,
           ),
@@ -36,14 +51,21 @@ class CommonListScreen extends StatelessWidget {
     );
   }
 
-  Widget _editButton(BuildContext context) {
-    return IconButton(
-      splashRadius: kDefaultPadding * 1.4,
-      iconSize: kDefaultPadding,
-      icon: const Icon(
-        Icons.edit,
+  Widget _editButton(
+    BuildContext context,
+    Map<String, dynamic> data,
+  ) {
+    return _buildIconButton(
+      icon: Icons.edit,
+      onPressed: () async => Navigator.push(
+        context,
+        MaterialPageRouteWithoutAnimation(
+          builder: (context) => CommonEditScreen(
+            form: formData,
+            data: data,
+          ),
+        ),
       ),
-      onPressed: () {},
     );
   }
 
@@ -66,9 +88,8 @@ class CommonListScreen extends StatelessWidget {
             );
           }
         },
-        child: IconButton(
-          splashRadius: kDefaultPadding * 1.4,
-          iconSize: kDefaultPadding,
+        child: _buildIconButton(
+          icon: Icons.delete,
           onPressed: () async => showConfirm(
             context: context,
             onCancel: () => {},
@@ -78,9 +99,6 @@ class CommonListScreen extends StatelessWidget {
                     data: data,
                   ),
                 ),
-          ),
-          icon: const Icon(
-            Icons.delete,
           ),
           color: Colors.red,
         ),
@@ -144,6 +162,7 @@ class CommonListScreen extends StatelessWidget {
                     ),
                     _editButton(
                       context,
+                      item,
                     ),
                     const SizedBox(
                       width: kDefaultPadding,

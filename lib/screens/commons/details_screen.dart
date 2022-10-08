@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 
-class DetailsScreen extends StatelessWidget {
+class CommonDetailsScreen extends StatelessWidget {
   final Map<String, dynamic> form;
   final Map<String, dynamic> data;
 
-  const DetailsScreen({
+  const CommonDetailsScreen({
     super.key,
     required this.form,
     required this.data,
