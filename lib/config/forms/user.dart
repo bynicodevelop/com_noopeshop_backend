@@ -27,5 +27,22 @@ Map<String, dynamic> userForm = {
         return null;
       },
     }
-  ]
+  ],
+  "table": [
+    {
+      "field_name": "display_name",
+      "data_model": "displayName",
+      "label": "Display Name",
+    },
+    {
+      "field_name": "email",
+      "data_model": "email",
+      "label": "E-mail",
+    },
+    {
+      "field_name": "actions",
+      "data_model": "actions",
+      "label": "Actions",
+    },
+  ],
 };

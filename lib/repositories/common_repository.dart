@@ -22,8 +22,9 @@ class CommonRepository {
       "listCommon",
     );
 
-    final HttpsCallableResult httpsCallableResult =
-        await httpsCallable.call(data);
+    final HttpsCallableResult httpsCallableResult = await httpsCallable.call({
+      "collection": data["collection"],
+    });
 
     return Map<String, dynamic>.from(httpsCallableResult.data);
   }

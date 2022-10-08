@@ -12,12 +12,12 @@ final menuFactory = [
     ),
     "default": true,
   },
-  {
-    "id": "products",
-    "label": "Products",
-    "icon": Icons.add_box_outlined,
-    "screen": CommonListScreen(
-      formData: userForm,
-    )
-  }
+  // {
+  //   "id": "products",
+  //   "label": "Products",
+  //   "icon": Icons.add_box_outlined,
+  //   "screen": CommonListScreen(
+  //     formData: userForm,
+  //   )
+  // }
 ];
