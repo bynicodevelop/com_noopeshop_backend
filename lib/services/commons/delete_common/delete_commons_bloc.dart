@@ -18,7 +18,7 @@ class DeleteCommonBloc extends Bloc<DeleteCommonEvent, DeleteCommonState> {
       try {
         await commonRepository.delete({
           "collection": event.form["collection"],
-          "uid": event.formData["uid"],
+          "uid": event.data["uid"],
         });
 
         emit(DeleteCommonSuccessState());
