@@ -7,4 +7,18 @@ abstract class NavigationCommonState extends Equatable {
   List<Object> get props => [];
 }
 
-class NavigationCommonInitialState extends NavigationCommonState {}
+class NavigationCommonInitialState extends NavigationCommonState {
+  final int index;
+  final Map<String, dynamic> data;
+
+  const NavigationCommonInitialState({
+    this.index = 0,
+    this.data = const {},
+  });
+
+  @override
+  List<Object> get props => [
+        index,
+        data,
+      ];
+}

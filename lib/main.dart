@@ -26,10 +26,19 @@ class App extends StatelessWidget {
     return ServiceFactory(
       getIt.get<CommonRepository>(),
       getIt<UserRepository>(),
-      child: const MaterialApp(
+      child: MaterialApp(
         title: "Noopeshop Backend",
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            elevation: 0,
+            iconTheme: const IconThemeData(
+              color: Colors.black87,
+            ),
+          ),
+        ),
+        home: const HomeScreen(),
       ),
     );
   }
