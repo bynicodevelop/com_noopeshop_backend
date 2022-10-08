@@ -14,8 +14,21 @@ class CommonListScreen extends StatelessWidget {
     required this.formData,
   });
 
+  Widget _detailsButton(
+    BuildContext context,
+    Map<String, dynamic> data,
+  ) {
+    return IconButton(
+      splashRadius: kDefaultPadding * 1.4,
+      iconSize: kDefaultPadding,
+      icon: const Icon(Icons.open_in_new_outlined),
+      onPressed: () {},
+    );
+  }
+
   Widget _editButton(BuildContext context) {
     return IconButton(
+      splashRadius: kDefaultPadding * 1.4,
       iconSize: kDefaultPadding,
       icon: const Icon(
         Icons.edit,
@@ -44,6 +57,7 @@ class CommonListScreen extends StatelessWidget {
           }
         },
         child: IconButton(
+          splashRadius: kDefaultPadding * 1.4,
           iconSize: kDefaultPadding,
           onPressed: () async => showConfirm(
             context: context,
@@ -111,6 +125,13 @@ class CommonListScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    _detailsButton(
+                      context,
+                      item,
+                    ),
+                    const SizedBox(
+                      width: kDefaultPadding,
+                    ),
                     _editButton(
                       context,
                     ),
@@ -129,7 +150,9 @@ class CommonListScreen extends StatelessWidget {
 
           return DataCell(
             Text(
-              item[table["data_model"]],
+              table["formatter"] != null
+                  ? table["formatter"].call(item[table["data_model"]])
+                  : item[table["data_model"]],
             ),
           );
         }).toList(),

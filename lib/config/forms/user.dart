@@ -33,6 +33,7 @@ Map<String, dynamic> userForm = {
       "field_name": "uid",
       "data_model": "uid",
       "label": "#",
+      "formatter": (String value) => value.substring(0, 6),
     },
     {
       "field_name": "display_name",
