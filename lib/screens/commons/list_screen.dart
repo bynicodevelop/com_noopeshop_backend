@@ -1,5 +1,5 @@
 import "package:com_noopeshop_backend/config/constants.dart";
-import "package:com_noopeshop_backend/services/commons/delete_commons/delete_commons_bloc.dart";
+import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
 import "package:com_noopeshop_backend/utils/notifications.dart";
 import "package:flutter/material.dart";

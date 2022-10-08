@@ -1,4 +1,4 @@
-import "package:com_noopeshop_backend/services/users/create_user/create_user_bloc.dart";
+import "package:com_noopeshop_backend/services/commons/create_common/create_common_bloc.dart";
 import "package:com_noopeshop_backend/utils/form_generator.dart";
 import "package:com_noopeshop_backend/utils/notifications.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -17,9 +17,12 @@ class FormGeneratorComponent extends StatelessWidget {
     final FormGenerator formGenerator = FormGenerator(
       formData: formData["form"],
       onSubmitted: (Map<String, dynamic> dataFields) {
-        context.read<CreateUserBloc>().add(
-              OnCreateUserEvent(
-                data: dataFields,
+        context.read<CreateCommonBloc>().add(
+              OnCreateCommonEvent(
+                data: {
+                  "collection": formData["collection"],
+                  "data": dataFields,
+                },
               ),
             );
       },
@@ -34,12 +37,12 @@ class FormGeneratorComponent extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: BlocListener<CreateUserBloc, CreateUserState>(
+          child: BlocListener<CreateCommonBloc, CreateCommonState>(
             listener: (context, state) async {
-              if (state is CreateUserSuccessState) {
+              if (state is CreateCommonSuccessState) {
                 await sendNotification(
                   context,
-                  "User created successfully",
+                  "Created successfully",
                 );
               }
             },
