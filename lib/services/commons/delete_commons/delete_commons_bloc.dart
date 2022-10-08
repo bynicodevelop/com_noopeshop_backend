@@ -6,22 +6,24 @@ import "package:equatable/equatable.dart";
 part "delete_commons_event.dart";
 part "delete_commons_state.dart";
 
-class DeleteCommonBloc extends Bloc<DeleteCommonsEvent, DeleteCommonsState> {
+class DeleteCommonBloc extends Bloc<DeleteCommonEvent, DeleteCommonState> {
   final CommonRepository commonRepository;
 
   DeleteCommonBloc(
     this.commonRepository,
-  ) : super(DeleteCommonsInitialState()) {
-    on<OnDeleteCommonsEvent>((event, emit) async {
-      emit(DeleteCommonsLoadingState());
+  ) : super(DeleteCommonInitialState()) {
+    on<OnDeleteCommonEvent>((event, emit) async {
+      emit(DeleteCommonLoadingState());
 
       try {
         await commonRepository.delete({
           "collection": event.form["collection"],
           "uid": event.formData["uid"],
         });
+
+        emit(DeleteCommonSuccessState());
       } on StandardException catch (e) {
-        emit(DeleteCommonsErrorState(
+        emit(DeleteCommonErrorState(
           code: e.code,
         ));
       }

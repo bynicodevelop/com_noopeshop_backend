@@ -1,22 +1,22 @@
 part of "delete_commons_bloc.dart";
 
-abstract class DeleteCommonsState extends Equatable {
-  const DeleteCommonsState();
+abstract class DeleteCommonState extends Equatable {
+  const DeleteCommonState();
 
   @override
   List<Object> get props => [];
 }
 
-class DeleteCommonsInitialState extends DeleteCommonsState {}
+class DeleteCommonInitialState extends DeleteCommonState {}
 
-class DeleteCommonsLoadingState extends DeleteCommonsState {}
+class DeleteCommonLoadingState extends DeleteCommonState {}
 
-class DeleteCommonsSuccessState extends DeleteCommonsState {}
+class DeleteCommonSuccessState extends DeleteCommonState {}
 
-class DeleteCommonsErrorState extends DeleteCommonsState {
+class DeleteCommonErrorState extends DeleteCommonState {
   final String code;
 
-  const DeleteCommonsErrorState({
+  const DeleteCommonErrorState({
     required this.code,
   });
 

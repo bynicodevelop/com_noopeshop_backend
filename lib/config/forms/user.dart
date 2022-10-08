@@ -30,6 +30,11 @@ Map<String, dynamic> userForm = {
   ],
   "table": [
     {
+      "field_name": "uid",
+      "data_model": "uid",
+      "label": "#",
+    },
+    {
       "field_name": "display_name",
       "data_model": "displayName",
       "label": "Display Name",
