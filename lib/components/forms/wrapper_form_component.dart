@@ -15,59 +15,14 @@ class WrapperFormComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black.withOpacity(0.5),
-      child: Center(
-        child: Stack(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(
-                kDefaultPadding,
-              ),
-              padding: const EdgeInsets.only(
-                top: kDefaultPadding * 2,
-                left: kDefaultPadding,
-                right: kDefaultPadding,
-              ),
-              width: MediaQuery.of(context).size.width * 0.5,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: child,
-            ),
-            Positioned(
-              top: kDefaultPadding,
-              right: kDefaultPadding,
-              child: Padding(
-                padding: const EdgeInsets.all(
-                  kDefaultPadding / 2,
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(100),
-                    onTap: () {
-                      if (onClose != null) {
-                        onClose!();
-                      }
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.all(
-                        kDefaultPadding / 2,
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.black,
-                        size: kDefaultPadding,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      padding: const EdgeInsets.only(
+        top: kDefaultPadding * 3,
+        left: kDefaultPadding * 2,
+        right: kDefaultPadding * 2,
+        bottom: kDefaultPadding * 3,
       ),
+      child: child,
     );
   }
 }

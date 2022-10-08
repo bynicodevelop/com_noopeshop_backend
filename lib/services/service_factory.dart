@@ -1,5 +1,7 @@
 import "package:com_noopeshop_backend/config/menu_factory.dart";
+import "package:com_noopeshop_backend/repositories/common_repository.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
+import "package:com_noopeshop_backend/services/commons/delete_commons/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
 import "package:com_noopeshop_backend/services/users/create_user/create_user_bloc.dart";
 import "package:com_noopeshop_backend/services/users/list_user/list_user_bloc.dart";
@@ -8,11 +10,13 @@ import "package:flutter_bloc/flutter_bloc.dart";
 
 // ignore: must_be_immutable
 class ServiceFactory extends StatelessWidget {
+  late CommonRepository commonRepository;
   late UserRepository userRepository;
 
   final Widget child;
 
   ServiceFactory(
+    this.commonRepository,
     this.userRepository, {
     super.key,
     required this.child,
@@ -37,6 +41,11 @@ class ServiceFactory extends StatelessWidget {
         BlocProvider<ListUserBloc>(
           create: (context) => ListUserBloc(
             userRepository,
+          ),
+        ),
+        BlocProvider<DeleteCommonsBloc>(
+          create: (context) => DeleteCommonsBloc(
+            commonRepository,
           ),
         ),
       ],

@@ -1,6 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:cloud_functions/cloud_functions.dart";
 import "package:com_noopeshop_backend/config/firebase_config.dart";
+import "package:com_noopeshop_backend/repositories/common_repository.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_storage/firebase_storage.dart";
@@ -54,6 +55,13 @@ $initGetIt(
   // UserRepository
   gh.lazySingleton<UserRepository>(
     () => UserRepository(
+      getIt<FirebaseFunctions>(),
+    ),
+  );
+
+  // CommonRepository
+  gh.lazySingleton<CommonRepository>(
+    () => CommonRepository(
       getIt<FirebaseFunctions>(),
     ),
   );

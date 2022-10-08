@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/config/dependency_config.dart";
+import "package:com_noopeshop_backend/repositories/common_repository.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
 import "package:com_noopeshop_backend/screens/home_screen.dart";
 import "package:com_noopeshop_backend/services/service_factory.dart";
@@ -23,6 +24,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ServiceFactory(
+      getIt.get<CommonRepository>(),
       getIt<UserRepository>(),
       child: const MaterialApp(
         title: "Noopeshop Backend",
