@@ -202,6 +202,14 @@ class CommonListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (formData.isEmpty) {
+      return const Scaffold(
+        body: Center(
+          child: Text("No data"),
+        ),
+      );
+    }
+
     return BlocBuilder<ListCommonBloc, ListCommonState>(
       bloc: context.read<ListCommonBloc>()
         ..add(OnListCommonEvent(
