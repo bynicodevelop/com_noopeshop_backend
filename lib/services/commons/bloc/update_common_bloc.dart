@@ -21,7 +21,7 @@ class UpdateCommonBloc extends Bloc<UpdateCommonEvent, UpdateCommonState> {
 
         emit(UpdateCommonSuccessState());
       } on StandardException catch (e) {
-        emit(UpdateCommonErrorState(
+        emit(UpdateCommonFailureState(
           code: e.code,
         ));
       }

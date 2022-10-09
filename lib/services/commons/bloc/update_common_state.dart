@@ -13,10 +13,10 @@ class UpdateCommonLoadingState extends UpdateCommonState {}
 
 class UpdateCommonSuccessState extends UpdateCommonState {}
 
-class UpdateCommonErrorState extends UpdateCommonState {
+class UpdateCommonFailureState extends UpdateCommonState {
   final String code;
 
-  const UpdateCommonErrorState({
+  const UpdateCommonFailureState({
     required this.code,
   });
 
