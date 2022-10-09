@@ -212,7 +212,24 @@ class CommonListScreen extends StatelessWidget {
             (state as ListCommonInitialState).list;
 
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () => context.read<NavigationCommonBloc>().add(
+                      const OnNavigationCommonEvent(
+                        screenName: "create",
+                        data: {},
+                      ),
+                    ),
+                icon: const Icon(
+                  Icons.add,
+                ),
+              ),
+              const SizedBox(
+                width: kDefaultPadding,
+              )
+            ],
+          ),
           body: SingleChildScrollView(
             child: SizedBox(
               width: double.infinity,

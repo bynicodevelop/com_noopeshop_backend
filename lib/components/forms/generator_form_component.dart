@@ -14,6 +14,7 @@ class FormGeneratorComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(formData);
     final FormGenerator formGenerator = FormGenerator(
       formData: formData["form"],
       onSubmitted: (Map<String, dynamic> dataFields) {

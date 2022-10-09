@@ -1,3 +1,4 @@
+import "package:com_noopeshop_backend/screens/commons/create_screen.dart";
 import "package:com_noopeshop_backend/screens/commons/details_screen.dart";
 import "package:com_noopeshop_backend/screens/commons/edit_screen.dart";
 import "package:com_noopeshop_backend/screens/commons/list_screen.dart";
@@ -46,6 +47,9 @@ class _CommonScreenState extends State<CommonScreen> {
             form: widget.form,
           ),
           CommonEditScreen(
+            form: widget.form,
+          ),
+          CommonCreateScreen(
             form: widget.form,
           )
         ],
