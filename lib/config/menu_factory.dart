@@ -1,3 +1,4 @@
+import "package:com_noopeshop_backend/config/forms/product.dart";
 import "package:com_noopeshop_backend/config/forms/user.dart";
 import "package:com_noopeshop_backend/screens/common_screen.dart";
 import "package:flutter/material.dart";
@@ -16,8 +17,8 @@ final menuFactory = [
     "id": "products",
     "label": "Products",
     "icon": Icons.add_box_outlined,
-    "screen": const CommonScreen(
-      form: {},
+    "screen": CommonScreen(
+      form: productForm,
     )
   }
 ];
