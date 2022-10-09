@@ -1,3 +1,4 @@
+import "package:com_noopeshop_backend/services/commons/bloc/update_common_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/create_common/create_common_bloc.dart";
 import "package:com_noopeshop_backend/utils/form_generator.dart";
 import "package:com_noopeshop_backend/utils/notifications.dart";
@@ -34,15 +35,29 @@ class FormGeneratorComponent extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: BlocListener<CreateCommonBloc, CreateCommonState>(
-            listener: (context, state) async {
-              if (state is CreateCommonSuccessState) {
-                await sendNotification(
-                  context,
-                  "Created successfully",
-                );
-              }
-            },
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<CreateCommonBloc, CreateCommonState>(
+                listener: (context, state) async {
+                  if (state is CreateCommonSuccessState) {
+                    await sendNotification(
+                      context,
+                      "Created successfully",
+                    );
+                  }
+                },
+              ),
+              BlocListener<UpdateCommonBloc, UpdateCommonState>(
+                listener: (context, state) async {
+                  if (state is UpdateCommonSuccessState) {
+                    await sendNotification(
+                      context,
+                      "Updated successfully",
+                    );
+                  }
+                },
+              ),
+            ],
             child: formGenerator.render(),
           ),
         ),
