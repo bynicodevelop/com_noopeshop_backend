@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:validators/validators.dart";
 
 class EmailInputFormComponent extends StatefulWidget {
-  final TextEditingController controller;
+  final ValueNotifier<String> controller;
   final String? Function(String)? validator;
   final Function(bool)? hasError;
   final String label;
@@ -21,6 +21,7 @@ class EmailInputFormComponent extends StatefulWidget {
 }
 
 class _EmailInputFormComponentState extends State<EmailInputFormComponent> {
+  final TextEditingController _textEditingController = TextEditingController();
   late String? Function(String) _validator;
   final FocusNode _focusNode = FocusNode();
   String? _errorText;
@@ -28,6 +29,8 @@ class _EmailInputFormComponentState extends State<EmailInputFormComponent> {
   @override
   void initState() {
     super.initState();
+
+    _textEditingController.text = widget.controller.value;
 
     _validator = widget.validator ??
         (String value) {
@@ -44,8 +47,10 @@ class _EmailInputFormComponentState extends State<EmailInputFormComponent> {
 
     _focusNode.addListener(() {
       if (!_focusNode.hasFocus) {
+        widget.controller.value = _textEditingController.text;
+
         setState(() {
-          _errorText = _validator(widget.controller.text);
+          _errorText = _validator(widget.controller.value);
         });
 
         if (widget.hasError != null) {
@@ -59,7 +64,7 @@ class _EmailInputFormComponentState extends State<EmailInputFormComponent> {
   Widget build(BuildContext context) {
     return TextField(
       focusNode: _focusNode,
-      controller: widget.controller,
+      controller: _textEditingController,
       decoration: InputDecoration(
         labelText: widget.label,
         errorText: _errorText,

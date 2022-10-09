@@ -2,20 +2,22 @@
 import "dart:io";
 
 // ignore: depend_on_referenced_packages
-import "package:cross_file/cross_file.dart";
 import "package:com_noopeshop_backend/config/constants.dart";
 import "package:desktop_drop/desktop_drop.dart";
 import "package:dotted_border/dotted_border.dart";
 import "package:flutter/material.dart";
 
+// ignore: depend_on_referenced_packages
+import "package:cross_file/cross_file.dart";
+
 class UploadInputFormComponent extends StatefulWidget {
-  final TextEditingController controller;
+  final ValueNotifier<List<dynamic>> data;
   final String label;
   final double heightDropZone;
 
   const UploadInputFormComponent({
     Key? key,
-    required this.controller,
+    required this.data,
     this.label = "Drag and drop your file here",
     this.heightDropZone = 200,
   }) : super(key: key);
@@ -26,7 +28,6 @@ class UploadInputFormComponent extends StatefulWidget {
 }
 
 class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
-  final List<XFile> _files = [];
   bool _isDragOver = false;
 
   @override
@@ -43,7 +44,7 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
           onDragDone: (details) {
             setState(() => _isDragOver = false);
 
-            _files.addAll(details.files);
+            widget.data.value.addAll(details.files);
           },
           child: DottedBorder(
             color: _isDragOver ? Colors.grey[900]! : Colors.grey[300]!,
@@ -61,15 +62,15 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
             ),
           ),
         ),
-        if (_files.isNotEmpty)
+        if (widget.data.value.isNotEmpty)
           const SizedBox(
             height: kDefaultPadding,
           ),
-        if (_files.isNotEmpty)
+        if (widget.data.value.isNotEmpty)
           GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: _files.length,
+              itemCount: widget.data.value.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 6,
                 crossAxisSpacing: kDefaultPadding,
@@ -89,7 +90,11 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
                             kDefaultPadding / 4,
                           ),
                           image: DecorationImage(
-                            image: FileImage(File(_files[index].path)),
+                            image: widget.data.value[index] is XFile
+                                ? FileImage(File(widget.data.value[index].path))
+                                : Image.network(
+                                    widget.data.value[index],
+                                  ).image,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -98,9 +103,8 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
                         top: 0,
                         right: 0,
                         child: IconButton(
-                          onPressed: () {
-                            setState(() => _files.removeAt(index));
-                          },
+                          onPressed: () =>
+                              setState(() => widget.data.value.removeAt(index)),
                           icon: const Icon(
                             Icons.close,
                             color: Colors.white,

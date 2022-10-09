@@ -39,16 +39,15 @@ class CommonCreateScreen extends StatelessWidget {
           horizontal: kDefaultPadding,
         ),
         child: FormGeneratorComponent(
-          form: form,
-          onSubmitted: (dataFields) => context.read<CreateCommonBloc>().add(
-                OnCreateCommonEvent(
-                  data: {
-                    "collection": form["collection"],
-                    "data": dataFields,
-                  },
-                ),
-              ),
-        ),
+            form: form,
+            onSubmitted: (dataFields) => context.read<CreateCommonBloc>().add(
+                  OnCreateCommonEvent(
+                    data: {
+                      "collection": form["collection"],
+                      "data": dataFields,
+                    },
+                  ),
+                )),
       ),
     );
   }

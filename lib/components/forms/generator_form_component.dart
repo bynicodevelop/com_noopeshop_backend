@@ -88,7 +88,7 @@ class _FormGeneratorComponentState extends State<FormGeneratorComponent> {
               },
             ),
           ],
-          child: formGenerator.render(),
+          child: formGenerator.render(context),
         ),
         if (_isLoading)
           Container(
