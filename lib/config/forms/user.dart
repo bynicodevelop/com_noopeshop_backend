@@ -26,6 +26,13 @@ Map<String, dynamic> userForm = {
 
         return null;
       },
+    },
+    {
+      "field_name": "photoURL",
+      "data_model": "photoURL",
+      "label": "Avatar",
+      "field_type": "upload_input",
+      "validator": (String value) => null,
     }
   ],
   "table": [

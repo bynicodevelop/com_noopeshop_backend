@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import "dart:io";
 
 // ignore: depend_on_referenced_packages
@@ -8,11 +9,13 @@ import "package:dotted_border/dotted_border.dart";
 import "package:flutter/material.dart";
 
 class UploadInputFormComponent extends StatefulWidget {
+  final TextEditingController controller;
   final String label;
   final double heightDropZone;
 
   const UploadInputFormComponent({
     Key? key,
+    required this.controller,
     this.label = "Drag and drop your file here",
     this.heightDropZone = 200,
   }) : super(key: key);
@@ -58,14 +61,17 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
             ),
           ),
         ),
-        const SizedBox(
-          height: kDefaultPadding,
-        ),
-        Expanded(
-          child: GridView.builder(
+        if (_files.isNotEmpty)
+          const SizedBox(
+            height: kDefaultPadding,
+          ),
+        if (_files.isNotEmpty)
+          GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               itemCount: _files.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
+                crossAxisCount: 6,
                 crossAxisSpacing: kDefaultPadding,
               ),
               itemBuilder: (context, index) {
@@ -105,7 +111,6 @@ class _UploadInputFormComponentState extends State<UploadInputFormComponent> {
                   ),
                 );
               }),
-        ),
       ],
     );
   }

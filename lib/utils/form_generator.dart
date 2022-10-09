@@ -90,6 +90,7 @@ class FormGenerator {
     );
 
     return ListView(
+      shrinkWrap: true,
       children: _widgets,
     );
   }
