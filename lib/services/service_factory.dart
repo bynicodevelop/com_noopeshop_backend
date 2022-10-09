@@ -1,6 +1,7 @@
 import "package:com_noopeshop_backend/config/menu_factory.dart";
 import "package:com_noopeshop_backend/repositories/common_repository.dart";
 import "package:com_noopeshop_backend/repositories/user_repository.dart";
+import "package:com_noopeshop_backend/services/commons/bloc/update_common_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/create_common/create_common_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/delete_common/delete_commons_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/list_common/list_common_bloc.dart";
@@ -49,6 +50,11 @@ class ServiceFactory extends StatelessWidget {
         ),
         BlocProvider<CreateCommonBloc>(
           create: (context) => CreateCommonBloc(
+            commonRepository,
+          ),
+        ),
+        BlocProvider<UpdateCommonBloc>(
+          create: (context) => UpdateCommonBloc(
             commonRepository,
           ),
         ),

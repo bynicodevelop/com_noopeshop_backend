@@ -49,13 +49,13 @@ class CommonRepository {
       );
     }
 
-    final HttpsCallable httpsCallable = firebaseFunctions.httpsCallable(
-      "createCommon",
-    );
-
     if (data["data"] is! List) {
       data["data"] = [data["data"]];
     }
+
+    final HttpsCallable httpsCallable = firebaseFunctions.httpsCallable(
+      "createCommon",
+    );
 
     await httpsCallable.call({
       "collection": data["collection"],
@@ -63,7 +63,45 @@ class CommonRepository {
     });
   }
 
-  Future<void> update(Map<String, dynamic> data) async {}
+  Future<void> update(Map<String, dynamic> data) async {
+    info("$runtimeType.update", data: data);
+
+    if (data["collection"] == null || data["collection"] == "") {
+      throw StandardException(
+        code: "missing_parameters",
+        message: "Missing parameters",
+      );
+    }
+
+    if (data["data"] == null || data["data"] == "" || data["data"].isEmpty) {
+      throw StandardException(
+        code: "missing_parameters",
+        message: "Missing parameters",
+      );
+    }
+
+    if (data["data"] is! List) {
+      data["data"] = [data["data"]];
+    }
+
+    for (Map<String, dynamic> d in data["data"]) {
+      if (d["uid"] == null || d["uid"] == "") {
+        throw StandardException(
+          code: "missing_parameters",
+          message: "Missing parameters",
+        );
+      }
+    }
+
+    final HttpsCallable httpsCallable = firebaseFunctions.httpsCallable(
+      "updateCommon",
+    );
+
+    await httpsCallable.call({
+      "collection": data["collection"],
+      "data": data["data"],
+    });
+  }
 
   Future<void> createOrUpdate(Map<String, dynamic> data) async {}
 

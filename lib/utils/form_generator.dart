@@ -3,7 +3,8 @@ import "package:com_noopeshop_backend/config/form_mapper.dart";
 import "package:flutter/material.dart";
 
 class FormGenerator {
-  final List<Map<String, dynamic>> formData;
+  final List<Map<String, dynamic>> form;
+  final Map<String, dynamic> data;
   final Function(Map<String, dynamic>) onSubmitted;
   final Function() onError;
 
@@ -12,25 +13,42 @@ class FormGenerator {
   final List<Widget> _widgets = [];
 
   FormGenerator({
-    required this.formData,
+    required this.form,
     required this.onSubmitted,
     required this.onError,
+    this.data = const {},
   });
 
-  render() {
-    for (Map<String, dynamic> data in formData) {
-      TextEditingController controller = TextEditingController();
+  bool _isValidForm(List<Map<String, dynamic>> formData) {
+    bool isValid = true;
 
-      _controllers.putIfAbsent(data["data_model"], () => controller);
+    for (Map<String, dynamic> field in formData) {
+      if (field["validator"] != null) {
+        String? error = field["validator"]?.call(
+          _controllers[field["data_model"]]?.text ?? "",
+        );
 
-      if (data["validator"] != null) {
-        _errors.putIfAbsent(data["data_model"], () => true);
+        if (error != null) {
+          isValid = false;
+        }
       }
+    }
 
-      Widget widget = inputs[data["field_type"]]?.call(
-        _controllers[data["data_model"]],
-        data["label"],
-        hasError: (value) => _errors[data["data_model"]] = value,
+    return isValid;
+  }
+
+  render() {
+    for (Map<String, dynamic> formData in form) {
+      TextEditingController controller = TextEditingController(
+        text: data[formData["data_model"]] ?? "",
+      );
+
+      _controllers.putIfAbsent(formData["data_model"], () => controller);
+
+      Widget widget = inputs[formData["field_type"]]?.call(
+        _controllers[formData["data_model"]],
+        formData["label"],
+        hasError: (value) => _errors[formData["data_model"]] = value,
       ) as Widget;
 
       _widgets.add(
@@ -50,20 +68,17 @@ class FormGenerator {
           onPressed: () {
             Map<String, dynamic> dataFields = {};
 
-            // check if there are any errors
-            List<String> fieldsInError = _errors.keys
-                .where((element) => _errors[element] == true)
-                .toList();
+            dataFields.putIfAbsent("uid", () => data["uid"] ?? "");
 
-            if (fieldsInError.isNotEmpty) {
+            if (!_isValidForm(form)) {
               onError();
               return;
             }
 
-            for (Map<String, dynamic> data in formData) {
+            for (Map<String, dynamic> formData in form) {
               dataFields.putIfAbsent(
-                data["data_model"],
-                () => _controllers[data["data_model"]]!.text,
+                formData["data_model"],
+                () => _controllers[formData["data_model"]]!.text,
               );
             }
 

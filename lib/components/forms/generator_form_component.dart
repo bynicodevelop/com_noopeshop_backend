@@ -5,28 +5,24 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter/material.dart";
 
 class FormGeneratorComponent extends StatelessWidget {
-  final Map<String, dynamic> formData;
+  final Map<String, dynamic> form;
+  final Map<String, dynamic> data;
+
+  final Function(Map<String, dynamic>) onSubmitted;
 
   const FormGeneratorComponent({
     super.key,
-    required this.formData,
+    required this.form,
+    required this.onSubmitted,
+    this.data = const {},
   });
 
   @override
   Widget build(BuildContext context) {
-    print(formData);
     final FormGenerator formGenerator = FormGenerator(
-      formData: formData["form"],
-      onSubmitted: (Map<String, dynamic> dataFields) {
-        context.read<CreateCommonBloc>().add(
-              OnCreateCommonEvent(
-                data: {
-                  "collection": formData["collection"],
-                  "data": dataFields,
-                },
-              ),
-            );
-      },
+      data: data,
+      form: form["form"],
+      onSubmitted: onSubmitted,
       onError: () async {
         await sendNotification(
           context,

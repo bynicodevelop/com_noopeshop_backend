@@ -12,7 +12,7 @@ void main() {
         home: Scaffold(
           body: Builder(builder: (BuildContext context) {
             final FormGenerator formGenerator = FormGenerator(
-              formData: [
+              form: [
                 {
                   "field_name": "display_name",
                   "data_model": "displayName",
@@ -50,7 +50,7 @@ void main() {
         home: Scaffold(
           body: Builder(builder: (BuildContext context) {
             final FormGenerator formGenerator = FormGenerator(
-              formData: [
+              form: [
                 {
                   "field_name": "display_name",
                   "data_model": "displayName",

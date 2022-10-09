@@ -299,6 +299,192 @@ void main() {
     }));
   });
 
+  group("update", () {
+    test(
+        "Doit retourner un exception si toutes les données ne sont pas renseignées",
+        () {
+      // ARRANGE
+      final List<Map<String, dynamic>> datasets = [
+        {
+          "collection": null,
+        },
+        {
+          "collection": "",
+        },
+        {
+          "data": null,
+        },
+        {
+          "data": "",
+        },
+        {
+          "collection": null,
+          "data": null,
+        },
+        {
+          "collection": "",
+          "data": "",
+        },
+        {
+          "collection": null,
+          "data": [],
+        },
+        {
+          "collection": "",
+          "data": [],
+        },
+        {
+          "collection": "",
+          "data": [
+            {
+              "uid": null,
+            }
+          ],
+        },
+      ];
+
+      final FirebaseFunctions firebaseFunctions = MockFirebaseFunctions();
+
+      final CommonRepository commonRepository = CommonRepository(
+        firebaseFunctions,
+      );
+
+      // ACT
+      // ASSERT
+      for (Map<String, dynamic> dataset in datasets) {
+        expect(
+          () async {
+            await commonRepository.update(dataset);
+          },
+          throwsA(
+            isA<StandardException>()
+                .having((e) => e.code, "code", "missing_parameters"),
+          ),
+        );
+      }
+    });
+
+    test("Doit d'ajouter de la données par le biais de l'API", () async {
+      // ARRANGE
+      final FirebaseFunctions firebaseFunctions = MockFirebaseFunctions();
+
+      final MockHttpsCallableResult mockHttpsCallableResult =
+          MockHttpsCallableResult<dynamic>();
+
+      final HttpsCallable httpsCallable = MockHttpsCallable();
+
+      when(firebaseFunctions.httpsCallable("updateCommon"))
+          .thenReturn(httpsCallable);
+
+      when(httpsCallable.call({
+        "collection": "users",
+        "data": [
+          {
+            "uid": "uid",
+            "name": "name",
+          },
+        ],
+      })).thenAnswer((_) async {
+        return mockHttpsCallableResult;
+      });
+
+      when(mockHttpsCallableResult.data).thenReturn({
+        "result": "success",
+        "data": [
+          {
+            "uid": "uid",
+            "name": "name",
+          },
+        ],
+      });
+
+      final CommonRepository commonRepository = CommonRepository(
+        firebaseFunctions,
+      );
+
+      // ACT
+      await commonRepository.update({
+        "collection": "users",
+        "data": [
+          {
+            "uid": "uid",
+            "name": "name",
+          },
+        ],
+      });
+
+      // ASSERT
+      verify(httpsCallable.call({
+        "collection": "users",
+        "data": [
+          {
+            "uid": "uid",
+            "name": "name",
+          },
+        ],
+      }));
+    });
+  });
+
+  test("Doit d'ajouter de la données (objet) par le biais de l'API", () async {
+    // ARRANGE
+    final FirebaseFunctions firebaseFunctions = MockFirebaseFunctions();
+
+    final MockHttpsCallableResult mockHttpsCallableResult =
+        MockHttpsCallableResult<dynamic>();
+
+    final HttpsCallable httpsCallable = MockHttpsCallable();
+
+    when(firebaseFunctions.httpsCallable("updateCommon"))
+        .thenReturn(httpsCallable);
+
+    when(httpsCallable.call({
+      "collection": "users",
+      "data": [
+        {
+          "uid": "uid",
+          "name": "name",
+        },
+      ],
+    })).thenAnswer((_) async {
+      return mockHttpsCallableResult;
+    });
+
+    when(mockHttpsCallableResult.data).thenReturn({
+      "result": "success",
+      "data": [
+        {
+          "uid": "uid",
+          "name": "name",
+        },
+      ],
+    });
+
+    final CommonRepository commonRepository = CommonRepository(
+      firebaseFunctions,
+    );
+
+    // ACT
+    await commonRepository.update({
+      "collection": "users",
+      "data": {
+        "uid": "uid",
+        "name": "name",
+      },
+    });
+
+    // ASSERT
+    verify(httpsCallable.call({
+      "collection": "users",
+      "data": [
+        {
+          "uid": "uid",
+          "name": "name",
+        },
+      ],
+    }));
+  });
+
   group("delete", () {
     test(
         "Doit retourner une exception si tous les paramètres ne sont pas renseignés",
