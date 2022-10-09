@@ -1,7 +1,7 @@
 import "package:com_noopeshop_backend/components/forms/generator_form_component.dart";
 import "package:com_noopeshop_backend/config/constants.dart";
-import "package:com_noopeshop_backend/services/commons/bloc/update_common_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/navigation_common/navigation_common_bloc.dart";
+import 'package:com_noopeshop_backend/services/commons/update_common/update_common_bloc.dart';
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 

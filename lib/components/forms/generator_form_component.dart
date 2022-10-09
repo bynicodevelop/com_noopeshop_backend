@@ -1,5 +1,5 @@
-import "package:com_noopeshop_backend/services/commons/bloc/update_common_bloc.dart";
 import "package:com_noopeshop_backend/services/commons/create_common/create_common_bloc.dart";
+import "package:com_noopeshop_backend/services/commons/update_common/update_common_bloc.dart";
 import "package:com_noopeshop_backend/utils/form_generator.dart";
 import "package:com_noopeshop_backend/utils/notifications.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -88,7 +88,7 @@ class _FormGeneratorComponentState extends State<FormGeneratorComponent> {
               },
             ),
           ],
-          child: formGenerator.render(),
+          child: formGenerator.render(context),
         ),
         if (_isLoading)
           Container(

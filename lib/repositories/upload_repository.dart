@@ -19,10 +19,8 @@ class UploadRepository {
 
     final String filename = generateNameFromFile(file);
 
-    final String fileName = file.path.split("/").last;
-
     TaskSnapshot task =
-        await firebaseStorage.ref("images/$fileName").putFile(file);
+        await firebaseStorage.ref("images/$filename").putFile(file);
 
     final String url = await task.ref.getDownloadURL();
 

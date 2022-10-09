@@ -3,9 +3,11 @@ import "package:com_noopeshop_backend/components/forms/inputs/text/text_input_fo
 import "package:com_noopeshop_backend/components/forms/inputs/upload/upload_input_form_component.dart";
 import "package:flutter/material.dart";
 
+// ignore: depend_on_referenced_packages
+
 Map<String, dynamic> inputs = {
   "text_input": (
-    TextEditingController controller,
+    ValueNotifier<String> controller,
     String label, {
     String? Function(String)? validator,
     Function(bool)? hasError,
@@ -18,7 +20,7 @@ Map<String, dynamic> inputs = {
         hasError: hasError,
       ),
   "email_input": (
-    TextEditingController controller,
+    ValueNotifier<String> controller,
     String label, {
     String? Function(String)? validator,
     Function(bool)? hasError,
@@ -30,13 +32,13 @@ Map<String, dynamic> inputs = {
         hasError: hasError,
       ),
   "upload_input": (
-    TextEditingController controller,
+    ValueNotifier<List<dynamic>> data,
     String label, {
     String? Function(String)? validator,
     Function(bool)? hasError,
   }) =>
       UploadInputFormComponent(
-        controller: controller,
+        data: data,
         label: label,
         // validator:
         //     validator ?? (String value) => value.isEmpty ? "required" : null,
