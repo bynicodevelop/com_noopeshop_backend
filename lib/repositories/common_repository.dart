@@ -29,6 +29,11 @@ class CommonRepository {
       "collection": data["collection"],
     });
 
+    info(
+      "$runtimeType.list",
+      data: httpsCallableResult.data,
+    );
+
     return Map<String, dynamic>.from(httpsCallableResult.data);
   }
 
