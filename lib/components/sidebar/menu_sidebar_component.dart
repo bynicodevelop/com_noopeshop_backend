@@ -13,6 +13,12 @@ class MenuSidebasComponent extends StatelessWidget {
         final Map<String, dynamic> currentMenu =
             (state as ClickMenuInitialState).menu;
 
+        if (menuFactory.isEmpty) {
+          return const Center(
+            child: Text("No menu found"),
+          );
+        }
+
         return ListView.builder(
           shrinkWrap: true,
           itemCount: menuFactory.length,

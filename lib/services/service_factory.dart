@@ -30,14 +30,16 @@ class ServiceFactory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> defaultMenu = menuFactory.isEmpty
+        ? {}
+        : menuFactory.firstWhere(
+            (element) => element["default"] == true,
+          );
+
     return MultiBlocProvider(
       providers: [
         BlocProvider<ClickMenuBloc>(
-          create: (context) => ClickMenuBloc(
-            menuFactory.firstWhere(
-              (element) => element["default"] == true,
-            ),
-          ),
+          create: (context) => ClickMenuBloc(defaultMenu),
         ),
         BlocProvider<NavigationCommonBloc>(
           create: (context) => NavigationCommonBloc(),

@@ -1,7 +1,6 @@
 import "package:com_noopeshop_backend/config/menu_factory.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
 import "package:flutter/material.dart";
-
 import "package:flutter_bloc/flutter_bloc.dart";
 
 class PageScreen extends StatefulWidget {
@@ -36,10 +35,14 @@ class _PageScreenState extends State<PageScreen> {
           );
         }
       },
-      child: PageView(
-        controller: _pageController,
-        children: _screens,
-      ),
+      child: _screens.isNotEmpty
+          ? PageView(
+              controller: _pageController,
+              children: _screens,
+            )
+          : const Center(
+              child: Text("No menu found"),
+            ),
     );
   }
 }
