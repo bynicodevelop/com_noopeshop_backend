@@ -1,9 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:cloud_functions/cloud_functions.dart";
 import "package:com_noopeshop_backend/config/firebase_config.dart";
-import "package:com_noopeshop_backend/repositories/common_repository.dart";
-import "package:com_noopeshop_backend/repositories/upload_repository.dart";
-import "package:com_noopeshop_backend/utils/pretreatment.dart";
+import 'package:com_noopeshop_backend/repositories/product_repository.dart';
 import "package:firebase_auth/firebase_auth.dart";
 import "package:firebase_storage/firebase_storage.dart";
 import "package:get_it/get_it.dart";
@@ -53,22 +51,10 @@ $initGetIt(
     () => FirebaseFunctions.instance,
   );
 
-  // CommonRepository
-  gh.lazySingleton<CommonRepository>(
-    () => CommonRepository(
-      getIt<FirebaseFunctions>(),
+  // ProductRepository
+  gh.lazySingleton<ProductRepository>(
+    () => ProductRepository(
+      getIt<FirebaseFirestore>(),
     ),
-  );
-
-  // UploadRepository
-  gh.lazySingleton<UploadRepository>(
-    () => UploadRepository(
-      getIt<FirebaseStorage>(),
-    ),
-  );
-
-  // PreTreatment
-  gh.lazySingleton<PreTreatment>(
-    () => PreTreatment(),
   );
 }

@@ -1,5 +1,7 @@
 import "package:com_noopeshop_backend/components/data_table/data_table_component.dart";
+import "package:com_noopeshop_backend/services/products/list_products/list_products_bloc.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 
 List<List<Map<String, dynamic>>> table = [
   [
@@ -64,16 +66,21 @@ List<List<Map<String, dynamic>>> table = [
   ],
 ];
 
-class CateoriesListScreen extends StatelessWidget {
-  const CateoriesListScreen({super.key});
+class ProductListScreen extends StatelessWidget {
+  const ProductListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
         width: double.infinity,
-        child: DataTableComponent(
-          table: table,
+        child: BlocBuilder<ListProductsBloc, ListProductsState>(
+          bloc: context.read<ListProductsBloc>()..add(OnListProductsEvent()),
+          builder: (context, state) {
+            return DataTableComponent(
+              table: table,
+            );
+          },
         ),
       ),
     );
