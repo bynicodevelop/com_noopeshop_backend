@@ -26,7 +26,7 @@ void main() {
               onSubmitted: (Map<String, dynamic> data) {},
             );
 
-            return formGenerator.render();
+            return formGenerator.render(context);
           }),
         ),
       ),
@@ -66,7 +66,7 @@ void main() {
               onSubmitted: (Map<String, dynamic> data) {},
             );
 
-            return formGenerator.render();
+            return formGenerator.render(context);
           }),
         ),
       ),

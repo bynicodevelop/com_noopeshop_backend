@@ -6,7 +6,7 @@ void main() {
   testWidgets("Doit valider les éléments du formulaire",
       (WidgetTester tester) async {
     // ARRANGE
-    final TextEditingController controller = TextEditingController();
+    final ValueNotifier<String> controller = ValueNotifier("");
     bool hasError = false;
 
     await tester.pumpWidget(
@@ -32,7 +32,7 @@ void main() {
       "Doit afficher un message d'erreur quand le champs est vidé et que le focus est perdu",
       (WidgetTester tester) async {
     // ARRANGE
-    final TextEditingController controller = TextEditingController();
+    final ValueNotifier<String> controller = ValueNotifier("");
     bool hasError = false;
 
     late BuildContext ctx;
@@ -85,7 +85,7 @@ void main() {
       "Doit retourner un message d'erreur avec validateur avec minimum 3 caractères",
       (WidgetTester tester) async {
     // ARRANGE
-    final TextEditingController controller = TextEditingController();
+    final ValueNotifier<String> controller = ValueNotifier("");
     bool hasError = false;
 
     late BuildContext ctx;

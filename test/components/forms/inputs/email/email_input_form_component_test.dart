@@ -7,7 +7,7 @@ main() {
     WidgetTester tester,
   ) async {
     // ARRANGE
-    final TextEditingController controller = TextEditingController();
+    final ValueNotifier<String> controller = ValueNotifier("");
     bool hasError = false;
 
     await tester.pumpWidget(
@@ -34,7 +34,7 @@ main() {
     WidgetTester tester,
   ) async {
     // ARRANGE
-    final TextEditingController controller = TextEditingController();
+    final ValueNotifier<String> controller = ValueNotifier("");
     bool hasError = false;
 
     late BuildContext ctx;
@@ -82,7 +82,7 @@ main() {
   testWidgets("Doit retourner une erreur si l'email renseigné n'est pas valide",
       (WidgetTester tester) async {
     // ARRANGE
-    final TextEditingController controller = TextEditingController();
+    final ValueNotifier<String> controller = ValueNotifier("");
     bool hasError = false;
 
     late BuildContext ctx;
