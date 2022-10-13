@@ -168,8 +168,6 @@ class CommonListScreen extends StatelessWidget {
               ),
             );
           }
-          print(table["formatter"]);
-          print(item[table["data_model"]]);
           return DataCell(
             Text(
               table["formatter"] != null
