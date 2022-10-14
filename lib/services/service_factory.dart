@@ -1,6 +1,7 @@
 import "package:com_noopeshop_backend/config/menu_factory.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
+import "package:com_noopeshop_backend/services/products/edit_product/edit_product_bloc.dart";
 import "package:com_noopeshop_backend/services/products/import_aliexpress_product/import_aliexpress_product_bloc.dart";
 import "package:com_noopeshop_backend/services/products/list_products/list_products_bloc.dart";
 import "package:flutter/material.dart";
@@ -33,6 +34,11 @@ class ServiceFactory extends StatelessWidget {
         ),
         BlocProvider<ListProductsBloc>(
           create: (context) => ListProductsBloc(
+            productRepository,
+          ),
+        ),
+        BlocProvider<EditProductBloc>(
+          create: (context) => EditProductBloc(
             productRepository,
           ),
         ),

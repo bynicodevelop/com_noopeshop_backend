@@ -102,7 +102,51 @@ class ProductRepository {
 
   Future<void> create(Map<String, dynamic> data) async {}
 
-  Future<void> update(Map<String, dynamic> data) async {}
+  Future<void> update(Map<String, dynamic> data) async {
+    QueryResult queryResult = await graphQLRepository.query(r"""
+      mutation ($productInput: ProductInput!){
+          updateProduct(productInput: $productInput) {
+              __typename
+              ... on Product {
+                  uid
+                  name
+                  description
+              }
+              ... on ProductNotFoundError {
+                  code
+              }
+          }
+      }
+      """, variables: {
+      "productInput": {
+        "uid": data["uid"],
+        "name": data["name"],
+        "description": data["description"],
+        "categories": [],
+      },
+    });
+
+    Map<String, dynamic> updateProductData = queryResult.data!["updateProduct"];
+
+    if (updateProductData["__typename"] == "ProductNotFoundError") {
+      error(
+        "Failed to update product",
+        data: {
+          "data": data,
+          "exception": updateProductData["code"],
+        },
+      );
+
+      throw StandardException(
+        code: "update_product_failed",
+        message: "Update product failed",
+      );
+    }
+
+    info("Updated product", data: {
+      "data": data,
+    });
+  }
 
   Future<void> createOrUpdate(Map<String, dynamic> data) async {}
 

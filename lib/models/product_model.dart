@@ -17,6 +17,24 @@ class ProductModel extends Equatable {
     // required this.media,
   });
 
+  ProductModel copyWith({
+    String? uid,
+    String? productId,
+    String? name,
+    String? description,
+    // List<CategoryModel>? categories,
+    // List<MediaModel>? media,
+  }) {
+    return ProductModel(
+      uid: uid ?? this.uid,
+      productId: productId ?? this.productId,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      // categories: categories ?? this.categories,
+      // media: media ?? this.media,
+    );
+  }
+
   factory ProductModel.fromJson(
     Map<String, dynamic> json,
   ) =>

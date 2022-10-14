@@ -3,6 +3,7 @@ import "package:com_noopeshop_backend/components/forms/inputs/textarea/textarea_
 import "package:com_noopeshop_backend/components/pages/bloc/wrapper_page_bloc.dart";
 import "package:com_noopeshop_backend/config/constants.dart";
 import "package:com_noopeshop_backend/models/product_model.dart";
+import "package:com_noopeshop_backend/services/products/edit_product/edit_product_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -54,7 +55,16 @@ class _EditScreenState extends State<EditScreen> {
                 ),
                 const Spacer(),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<EditProductBloc>().add(
+                          OnEditProductEvent(
+                            productModel: productModel.copyWith(
+                              name: _nameController.text,
+                              description: _descriptionController.text,
+                            ),
+                          ),
+                        );
+                  },
                   child: const Text("Save"),
                 ),
                 const SizedBox(
