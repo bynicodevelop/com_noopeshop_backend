@@ -1,35 +1,104 @@
+import "package:com_noopeshop_backend/config/constants.dart";
 import "package:flutter/material.dart";
 
-class DataTableComponent extends StatelessWidget {
+class DataTableComponent extends StatefulWidget {
   final List<List<Map<String, dynamic>>> table;
+  final Function(Map<String, dynamic>)? onDelete;
+  final Function(Map<String, dynamic>)? onEdit;
 
   const DataTableComponent({
     super.key,
     required this.table,
+    this.onDelete,
+    this.onEdit,
   });
 
+  @override
+  State<DataTableComponent> createState() => _DataTableComponentState();
+}
+
+class _DataTableComponentState extends State<DataTableComponent> {
   List<DataColumn> _headerTable(
     BuildContext context,
     List<List<Map<String, dynamic>>> data,
-  ) =>
-      data[0]
-          .map((e) => DataColumn(
-                label: e["label"],
-              ))
-          .toList();
+  ) {
+    if (data.isEmpty) return [];
+
+    List<DataColumn> headerColumn = data.first
+        .map((e) => DataColumn(
+              label: e["label"],
+            ))
+        .toList();
+
+    if (widget.onDelete != null || widget.onEdit != null) {
+      headerColumn.add(
+        const DataColumn(
+          label: Text(""),
+        ),
+      );
+    }
+
+    return headerColumn;
+  }
 
   List<DataRow> _bodyTable(
     BuildContext context,
     List<List<Map<String, dynamic>>> data,
   ) {
+    if (data.isEmpty) return [];
+
     List<DataRow> rows = data.map((List<Map<String, dynamic>> item) {
+      List<DataCell> cells = item
+          .map((e) => DataCell(
+                e["value"],
+              ))
+          .toList();
+
+      List<Widget> events = [];
+
+      if (widget.onEdit != null) {
+        events.add(
+          IconButton(
+            iconSize: kDefaultPadding * 1.2,
+            splashRadius: kDefaultPadding * 1.2,
+            icon: const Icon(Icons.edit),
+            onPressed: () {
+              widget.onEdit!(item.first);
+            },
+          ),
+        );
+      }
+
+      if (widget.onDelete != null) {
+        events.add(
+          IconButton(
+            iconSize: kDefaultPadding * 1.2,
+            splashRadius: kDefaultPadding * 1.2,
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              widget.onDelete!(item.first);
+            },
+          ),
+        );
+      }
+
+      if (events.isNotEmpty) {
+        cells.add(
+          DataCell(
+            Row(
+              children: events,
+            ),
+          ),
+        );
+      }
+
       return DataRow(
         onLongPress: () {},
-        cells: item.map((Map<String, dynamic> table) {
-          return DataCell(
-            table["value"],
-          );
-        }).toList(),
+        onSelectChanged: (value) {
+          setState(() => item.first["checked"] = value);
+        },
+        selected: item.first["checked"],
+        cells: cells,
       );
     }).toList();
 
@@ -41,11 +110,11 @@ class DataTableComponent extends StatelessWidget {
     return DataTable(
       columns: _headerTable(
         context,
-        table,
+        widget.table,
       ),
       rows: _bodyTable(
         context,
-        table,
+        widget.table,
       ),
     );
   }
