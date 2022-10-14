@@ -1,3 +1,4 @@
+import "package:com_noopeshop_backend/models/category_model.dart";
 import "package:equatable/equatable.dart";
 
 class ProductModel extends Equatable {
@@ -5,7 +6,7 @@ class ProductModel extends Equatable {
   final String productId;
   final String name;
   final String description;
-  // final List<CategoryModel> categories;
+  final List<CategoryModel> categories;
   // final List<MediaModel> media;
 
   const ProductModel({
@@ -13,7 +14,7 @@ class ProductModel extends Equatable {
     required this.productId,
     required this.name,
     required this.description,
-    // required this.categories,
+    required this.categories,
     // required this.media,
   });
 
@@ -22,7 +23,7 @@ class ProductModel extends Equatable {
     String? productId,
     String? name,
     String? description,
-    // List<CategoryModel>? categories,
+    List<CategoryModel>? categories,
     // List<MediaModel>? media,
   }) {
     return ProductModel(
@@ -30,7 +31,7 @@ class ProductModel extends Equatable {
       productId: productId ?? this.productId,
       name: name ?? this.name,
       description: description ?? this.description,
-      // categories: categories ?? this.categories,
+      categories: categories ?? this.categories,
       // media: media ?? this.media,
     );
   }
@@ -43,7 +44,9 @@ class ProductModel extends Equatable {
         productId: json["productId"],
         name: json["name"],
         description: json["description"],
-        // categories: json["categories"],
+        categories: (List<Map<String, dynamic>>.from(json["categories"]))
+            .map((Map<String, dynamic> e) => CategoryModel.fromJson(e))
+            .toList(),
         // media: json["media"],
       );
 
