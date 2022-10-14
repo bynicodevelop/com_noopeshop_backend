@@ -43,6 +43,7 @@ class _WrapperPageComponentState extends State<WrapperPageComponent> {
             kDefaultPadding,
           ),
           child: PageView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
               widget.list,
