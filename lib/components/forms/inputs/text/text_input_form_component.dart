@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 class TextInputFormComponent extends StatefulWidget {
-  final ValueNotifier<String> controller;
+  final TextEditingController controller;
   final Function(bool)? hasError;
   final String? Function(String)? validator;
   final String label;
@@ -27,16 +27,16 @@ class _TextInputFormComponentState extends State<TextInputFormComponent> {
   void initState() {
     super.initState();
 
-    _textEditingController.text = widget.controller.value;
+    _textEditingController.text = widget.controller.text;
 
     _focusNode.addListener(() {
       if (!_focusNode.hasFocus) {
-        widget.controller.value = _textEditingController.text;
+        widget.controller.text = _textEditingController.text;
 
         if (widget.validator == null) return;
 
         setState(() {
-          _textError = widget.validator!(widget.controller.value);
+          _textError = widget.validator!(widget.controller.text);
         });
 
         if (widget.hasError != null) {

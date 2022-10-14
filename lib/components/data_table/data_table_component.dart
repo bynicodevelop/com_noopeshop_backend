@@ -62,9 +62,7 @@ class _DataTableComponentState extends State<DataTableComponent> {
             iconSize: kDefaultPadding * 1.2,
             splashRadius: kDefaultPadding * 1.2,
             icon: const Icon(Icons.edit),
-            onPressed: () {
-              widget.onEdit!(item.first);
-            },
+            onPressed: () => widget.onEdit!(item.first),
           ),
         );
       }
