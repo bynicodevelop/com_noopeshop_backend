@@ -1,5 +1,7 @@
 // ignore: depend_on_referenced_packages
 import "package:bloc/bloc.dart";
+import "package:com_noopeshop_backend/exceptions/standard_exception.dart";
+import "package:com_noopeshop_backend/models/product_model.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
 import "package:equatable/equatable.dart";
 
@@ -13,7 +15,19 @@ class ListProductsBloc extends Bloc<ListProductsEvent, ListProductsState> {
     this.productRepository,
   ) : super(ListProductsInitialState()) {
     on<OnListProductsEvent>((event, emit) async {
-      await productRepository.list();
+      emit(ListProductsLoadingState());
+
+      try {
+        final List<ProductModel> productModel = await productRepository.list();
+
+        emit(ListProductsSuccessState(
+          products: productModel,
+        ));
+      } on StandardException catch (e) {
+        emit(ListProductsFailureState(
+          code: e.code,
+        ));
+      }
     });
   }
 }

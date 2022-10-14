@@ -8,3 +8,31 @@ abstract class ListProductsState extends Equatable {
 }
 
 class ListProductsInitialState extends ListProductsState {}
+
+class ListProductsLoadingState extends ListProductsState {}
+
+class ListProductsSuccessState extends ListProductsState {
+  final List<ProductModel> products;
+
+  const ListProductsSuccessState({
+    required this.products,
+  });
+
+  @override
+  List<Object> get props => [
+        products,
+      ];
+}
+
+class ListProductsFailureState extends ListProductsState {
+  final String code;
+
+  const ListProductsFailureState({
+    required this.code,
+  });
+
+  @override
+  List<Object> get props => [
+        code,
+      ];
+}

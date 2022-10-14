@@ -12,7 +12,11 @@ class DataTableComponent extends StatelessWidget {
     BuildContext context,
     List<List<Map<String, dynamic>>> data,
   ) =>
-      data[0].map((e) => DataColumn(label: Text(e["label"]))).toList();
+      data[0]
+          .map((e) => DataColumn(
+                label: e["label"],
+              ))
+          .toList();
 
   List<DataRow> _bodyTable(
     BuildContext context,
@@ -23,11 +27,7 @@ class DataTableComponent extends StatelessWidget {
         onLongPress: () {},
         cells: item.map((Map<String, dynamic> table) {
           return DataCell(
-            Text(
-              table["value"],
-              style: Theme.of(context).textTheme.subtitle2,
-              textAlign: TextAlign.center,
-            ),
+            table["value"],
           );
         }).toList(),
       );

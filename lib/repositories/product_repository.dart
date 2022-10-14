@@ -36,8 +36,6 @@ class ProductRepository {
       return ProductModel.fromJson(product);
     }).toList();
 
-    print(productModels);
-
     return productModels;
   }
 

@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/components/data_table/data_table_component.dart";
+import "package:com_noopeshop_backend/models/product_model.dart";
 import "package:com_noopeshop_backend/services/products/list_products/list_products_bloc.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
@@ -77,8 +78,34 @@ class ProductListScreen extends StatelessWidget {
         child: BlocBuilder<ListProductsBloc, ListProductsState>(
           bloc: context.read<ListProductsBloc>()..add(OnListProductsEvent()),
           builder: (context, state) {
+            if (state is ListProductsLoadingState ||
+                state is ListProductsInitialState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (state is ListProductsFailureState) {
+              return Center(
+                child: Text(state.code),
+              );
+            }
+
+            List<ProductModel> productModel =
+                (state as ListProductsSuccessState).products;
+
             return DataTableComponent(
-              table: table,
+              table: productModel
+                  .map((ProductModel e) => [
+                        {
+                          "label": const Text("Title"),
+                          "value": Text(
+                            e.name,
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        },
+                      ])
+                  .toList(),
             );
           },
         ),
