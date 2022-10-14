@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/components/data_table/data_table_component.dart";
+import "package:com_noopeshop_backend/components/menu/screen/screen_menu_component.dart";
 import "package:com_noopeshop_backend/components/modals/import_eliexpress_product_modal_component.dart";
 import "package:com_noopeshop_backend/components/pages/bloc/wrapper_page_bloc.dart";
 import "package:com_noopeshop_backend/models/product_model.dart";
@@ -76,9 +77,8 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            const Spacer(),
+        ScreenMenuComponent(
+          actions: [
             ElevatedButton(
               onPressed: () async {
                 showDialog(
