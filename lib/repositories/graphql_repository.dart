@@ -23,4 +23,16 @@ class GraphQLRepository {
       ),
     );
   }
+
+  Future<QueryResult> mutate(
+    String mutation, {
+    Map<String, dynamic> variables = const {},
+  }) async {
+    return await _client.mutate(
+      MutationOptions(
+        document: gql(mutation),
+        variables: variables,
+      ),
+    );
+  }
 }

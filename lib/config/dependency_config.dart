@@ -1,6 +1,7 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:cloud_functions/cloud_functions.dart";
 import "package:com_noopeshop_backend/config/firebase_config.dart";
+import "package:com_noopeshop_backend/repositories/category_repository.dart";
 import "package:com_noopeshop_backend/repositories/graphql_repository.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
 import "package:firebase_auth/firebase_auth.dart";
@@ -60,6 +61,13 @@ $initGetIt(
   // ProductRepository
   gh.lazySingleton<ProductRepository>(
     () => ProductRepository(
+      getIt.get<GraphQLRepository>(),
+    ),
+  );
+
+  // CategoryRepository
+  gh.lazySingleton<CategoryRepository>(
+    () => CategoryRepository(
       getIt.get<GraphQLRepository>(),
     ),
   );

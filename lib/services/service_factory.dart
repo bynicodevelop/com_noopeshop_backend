@@ -1,5 +1,7 @@
 import "package:com_noopeshop_backend/config/menu_factory.dart";
+import "package:com_noopeshop_backend/repositories/category_repository.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
+import "package:com_noopeshop_backend/services/categories/create_category/create_category_bloc.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
 import "package:com_noopeshop_backend/services/products/edit_product/edit_product_bloc.dart";
 import "package:com_noopeshop_backend/services/products/import_aliexpress_product/import_aliexpress_product_bloc.dart";
@@ -10,11 +12,13 @@ import "package:flutter_bloc/flutter_bloc.dart";
 // ignore: must_be_immutable
 class ServiceFactory extends StatelessWidget {
   final ProductRepository productRepository;
+  final CategoryRepository categoryRepository;
 
   final Widget child;
 
   const ServiceFactory(
-    this.productRepository, {
+    this.productRepository,
+    this.categoryRepository, {
     super.key,
     required this.child,
   });
@@ -45,6 +49,11 @@ class ServiceFactory extends StatelessWidget {
         BlocProvider<ImportAliexpressProductBloc>(
           create: (context) => ImportAliexpressProductBloc(
             productRepository,
+          ),
+        ),
+        BlocProvider<CreateCategoryBloc>(
+          create: (context) => CreateCategoryBloc(
+            categoryRepository,
           ),
         ),
       ],

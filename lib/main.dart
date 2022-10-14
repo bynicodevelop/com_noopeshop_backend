@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/config/dependency_config.dart";
+import "package:com_noopeshop_backend/repositories/category_repository.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
 import "package:com_noopeshop_backend/screens/home_screen.dart";
 import "package:com_noopeshop_backend/services/service_factory.dart";
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ServiceFactory(
       getIt.get<ProductRepository>(),
+      getIt.get<CategoryRepository>(),
       child: MaterialApp(
         title: "Noopeshop Backend",
         debugShowCheckedModeBanner: false,
