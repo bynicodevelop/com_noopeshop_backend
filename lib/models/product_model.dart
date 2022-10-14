@@ -55,7 +55,7 @@ class ProductModel extends Equatable {
         "productId": productId,
         "name": name,
         "description": description,
-        // "categories": categories,
+        "categories": categories,
         // "media": media,
       };
 
@@ -65,7 +65,7 @@ class ProductModel extends Equatable {
         productId,
         name,
         description,
-        // categories,
+        categories,
         // media,
       ];
 }
