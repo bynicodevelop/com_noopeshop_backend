@@ -5,11 +5,13 @@ import "package:flutter_bloc/flutter_bloc.dart";
 
 class WrapperPageComponent extends StatefulWidget {
   final Widget list;
+  final Widget create;
   final Widget edit;
 
   const WrapperPageComponent({
     super.key,
     required this.list,
+    required this.create,
     required this.edit,
   });
 
@@ -44,6 +46,7 @@ class _WrapperPageComponentState extends State<WrapperPageComponent> {
             controller: _pageController,
             children: [
               widget.list,
+              widget.create,
               widget.edit,
             ],
           ),

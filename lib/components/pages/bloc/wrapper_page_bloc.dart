@@ -8,7 +8,8 @@ part "wrapper_page_state.dart";
 
 const Map<String, dynamic> pages = {
   "list": 0,
-  "edit": 1,
+  "create": 1,
+  "edit": 2,
 };
 
 class WrapperPageBloc extends Bloc<WrapperPageEvent, WrapperPageState> {

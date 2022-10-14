@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 class ScreenMenuComponent extends StatelessWidget {
-  final List<ElevatedButton> actions;
+  final List<Widget> actions;
 
   const ScreenMenuComponent({
     super.key,

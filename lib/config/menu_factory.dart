@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/components/pages/wrapper_page_component.dart";
+import "package:com_noopeshop_backend/screens/categories/create_screen.dart";
 import "package:com_noopeshop_backend/screens/categories/list_screen.dart";
 import "package:com_noopeshop_backend/screens/products/edit_screen.dart";
 import "package:com_noopeshop_backend/screens/products/list_screen.dart";
@@ -11,6 +12,7 @@ final menuFactory = [
     "icon": Icons.add_box_outlined,
     "screen": const WrapperPageComponent(
       list: ProductListScreen(),
+      create: EditScreen(),
       edit: EditScreen(),
     ),
     "default": true,
@@ -21,6 +23,7 @@ final menuFactory = [
     "icon": Icons.category_outlined,
     "screen": const WrapperPageComponent(
       list: CategoriesListScreen(),
+      create: CategoriesCreateScreen(),
       edit: EditScreen(),
     ),
     "default": true,
