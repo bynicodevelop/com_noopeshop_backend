@@ -26,14 +26,22 @@ class _DataTableComponentState extends State<DataTableComponent> {
 
     List<DataColumn> headerColumn = data.first
         .map((e) => DataColumn(
-              label: e["label"],
+              label: SizedBox(
+                width: (MediaQuery.of(context).size.width - 500) /
+                        data.first.length +
+                    1,
+                child: e["label"],
+              ),
             ))
         .toList();
 
     if (widget.onEdit != null) {
       headerColumn.add(
         const DataColumn(
-          label: Text(""),
+          label: SizedBox(
+            width: 50,
+            child: Text("Edit"),
+          ),
         ),
       );
     }
