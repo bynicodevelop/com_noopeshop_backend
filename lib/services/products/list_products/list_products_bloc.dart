@@ -12,8 +12,8 @@ class ListProductsBloc extends Bloc<ListProductsEvent, ListProductsState> {
   ListProductsBloc(
     this.productRepository,
   ) : super(ListProductsInitialState()) {
-    on<OnListProductsEvent>((event, emit) {
-      print("OnListProductsEvent");
+    on<OnListProductsEvent>((event, emit) async {
+      await productRepository.list();
     });
   }
 }
