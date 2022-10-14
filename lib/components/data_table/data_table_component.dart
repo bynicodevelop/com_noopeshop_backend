@@ -3,13 +3,11 @@ import "package:flutter/material.dart";
 
 class DataTableComponent extends StatefulWidget {
   final List<List<Map<String, dynamic>>> table;
-  final Function(Map<String, dynamic>)? onDelete;
   final Function(Map<String, dynamic>)? onEdit;
 
   const DataTableComponent({
     super.key,
     required this.table,
-    this.onDelete,
     this.onEdit,
   });
 
@@ -30,7 +28,7 @@ class _DataTableComponentState extends State<DataTableComponent> {
             ))
         .toList();
 
-    if (widget.onDelete != null || widget.onEdit != null) {
+    if (widget.onEdit != null) {
       headerColumn.add(
         const DataColumn(
           label: Text(""),
@@ -64,19 +62,6 @@ class _DataTableComponentState extends State<DataTableComponent> {
             icon: const Icon(Icons.edit),
             onPressed: () {
               widget.onEdit!(item.first);
-            },
-          ),
-        );
-      }
-
-      if (widget.onDelete != null) {
-        events.add(
-          IconButton(
-            iconSize: kDefaultPadding * 1.2,
-            splashRadius: kDefaultPadding * 1.2,
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              widget.onDelete!(item.first);
             },
           ),
         );
