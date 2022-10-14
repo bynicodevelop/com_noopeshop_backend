@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/components/forms/inputs/text/text_input_form_component.dart";
+import "package:com_noopeshop_backend/components/forms/inputs/textarea/textarea_input_forms_component.dart";
 import "package:com_noopeshop_backend/components/pages/bloc/wrapper_page_bloc.dart";
 import "package:com_noopeshop_backend/config/constants.dart";
 import "package:com_noopeshop_backend/models/product_model.dart";
@@ -16,10 +17,12 @@ class EditScreen extends StatefulWidget {
 
 class _EditScreenState extends State<EditScreen> {
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   void dispose() {
     _nameController.dispose();
+    _descriptionController.dispose();
 
     super.dispose();
   }
@@ -33,35 +36,64 @@ class _EditScreenState extends State<EditScreen> {
         );
 
         _nameController.text = productModel.name;
+        _descriptionController.text = productModel.description;
 
         return Column(
           children: [
             Row(
               children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("ID : ${productModel.uid}"),
+                    const SizedBox(
+                      height: kDefaultPadding / 3,
+                    ),
+                    Text("ID produit : ${productModel.productId}"),
+                  ],
+                ),
                 const Spacer(),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text("Save"),
+                ),
+                const SizedBox(
+                  width: kDefaultPadding,
+                ),
                 IconButton(
                   iconSize: kDefaultPadding * 1.2,
                   splashRadius: kDefaultPadding * 1.2,
                   onPressed: () {
                     context.read<WrapperPageBloc>().add(
-                          const OnWrapperPageEvent(
-                            model: {},
+                          OnWrapperPageEvent(
+                            model: productModel.toJson(),
                             name: "list",
                           ),
                         );
                   },
-                  icon: const Icon(Icons.close),
+                  icon: const Icon(
+                    Icons.close,
+                  ),
                 ),
               ],
             ),
-            ListView(
-              shrinkWrap: true,
-              children: [
-                TextInputFormComponent(
-                  controller: _nameController,
-                  label: "Name",
-                )
-              ],
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  TextInputFormComponent(
+                    controller: _nameController,
+                    label: "Name",
+                  ),
+                  const SizedBox(
+                    height: kDefaultPadding,
+                  ),
+                  TextareaInputFormComponent(
+                    controller: _descriptionController,
+                    label: "Description",
+                  ),
+                ],
+              ),
             )
           ],
         );

@@ -33,6 +33,7 @@ class ProductRepository {
       query {
         products {
           uid,
+          productId,
           name,
           description,
           categories {
