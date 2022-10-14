@@ -1,4 +1,5 @@
 import "package:com_noopeshop_backend/exceptions/standard_exception.dart";
+import "package:com_noopeshop_backend/models/category_model.dart";
 import "package:com_noopeshop_backend/repositories/graphql_repository.dart";
 import "package:com_noopeshop_backend/utils/logger.dart";
 import "package:graphql_flutter/graphql_flutter.dart";
@@ -12,7 +13,42 @@ class CategoryRepository {
 
   Future<void> get() async {}
 
-  Future<void> list() async {}
+  Future<List<CategoryModel>> list() async {
+    final QueryResult queryResult = await graphQLRepository.query(
+      r"""
+        query {
+            categories {
+                uid
+                name
+                description
+            }
+        }
+        """,
+    );
+
+    if (queryResult.hasException) {
+      throw StandardException(
+        code: "list_categories_failure",
+        message: queryResult.exception.toString(),
+      );
+    }
+
+    final List<CategoryModel> categories = [];
+
+    return queryResult.data!["categories"].map<CategoryModel>(
+      (dynamic category) {
+        categories.add(
+          CategoryModel.fromJson(
+            category,
+          ),
+        );
+
+        return CategoryModel.fromJson(
+          category,
+        );
+      },
+    ).toList();
+  }
 
   Future<void> create(Map<String, dynamic> data) async {
     QueryResult result = await graphQLRepository.mutate(
@@ -38,8 +74,6 @@ class CategoryRepository {
         },
       },
     );
-
-    print(result);
 
     if (result.hasException) {
       throw StandardException(
