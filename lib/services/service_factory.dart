@@ -1,6 +1,5 @@
 import "package:com_noopeshop_backend/config/menu_factory.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
-import "package:com_noopeshop_backend/services/commons/navigation_common/navigation_common_bloc.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
 import "package:com_noopeshop_backend/services/products/import_aliexpress_product/import_aliexpress_product_bloc.dart";
 import "package:com_noopeshop_backend/services/products/list_products/list_products_bloc.dart";
@@ -31,9 +30,6 @@ class ServiceFactory extends StatelessWidget {
       providers: [
         BlocProvider<ClickMenuBloc>(
           create: (context) => ClickMenuBloc(defaultMenu),
-        ),
-        BlocProvider<NavigationCommonBloc>(
-          create: (context) => NavigationCommonBloc(),
         ),
         BlocProvider<ListProductsBloc>(
           create: (context) => ListProductsBloc(

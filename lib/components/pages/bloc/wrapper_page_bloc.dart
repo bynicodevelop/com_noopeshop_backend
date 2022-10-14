@@ -16,7 +16,6 @@ class WrapperPageBloc extends Bloc<WrapperPageEvent, WrapperPageState> {
     on<OnWrapperPageEvent>((event, emit) {
       info(
         "OnWrapperPageEvent",
-        data: event,
       );
 
       emit(WrapperPageInitialState(
