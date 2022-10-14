@@ -34,8 +34,8 @@ void main() {
 
       // ASSERT
       expect(
-        result["url"],
-        "https://firebasestorage.googleapis.com/v0/b/some-bucket/o/images/test.jpg",
+        result["url"].contains(filename),
+        true,
       );
 
       expect(

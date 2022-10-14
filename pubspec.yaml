@@ -52,6 +52,7 @@ dependencies:
   dotted_border: ^2.0.0+2
   show_confirm_modal: ^1.0.2
   logger: ^1.1.0
+  graphql_flutter: ^5.1.0
   
 
 dev_dependencies:
