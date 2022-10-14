@@ -4,11 +4,13 @@ import "package:flutter/material.dart";
 class DataTableComponent extends StatefulWidget {
   final List<List<Map<String, dynamic>>> table;
   final Function(Map<String, dynamic>)? onEdit;
+  final Function(List<Map<String, dynamic>>)? onSelected;
 
   const DataTableComponent({
     super.key,
     required this.table,
     this.onEdit,
+    this.onSelected,
   });
 
   @override
@@ -81,6 +83,15 @@ class _DataTableComponentState extends State<DataTableComponent> {
         onLongPress: () {},
         onSelectChanged: (value) {
           setState(() => item.first["checked"] = value);
+
+          List<Map<String, dynamic>> selected = data
+              .where((element) => element.first["checked"] == true)
+              .map((e) => e.first)
+              .toList();
+
+          if (widget.onSelected != null) {
+            widget.onSelected!(selected);
+          }
         },
         selected: item.first["checked"],
         cells: cells,

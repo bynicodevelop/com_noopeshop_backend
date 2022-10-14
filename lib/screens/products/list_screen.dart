@@ -137,9 +137,8 @@ class ProductListScreen extends StatelessWidget {
                               },
                             ])
                         .toList(),
-                    onEdit: (Map<String, dynamic> data) {
-                      print(data);
-                    },
+                    onSelected: (List<Map<String, dynamic>> selected) {},
+                    onEdit: (Map<String, dynamic> data) {},
                   );
                 },
               ),
