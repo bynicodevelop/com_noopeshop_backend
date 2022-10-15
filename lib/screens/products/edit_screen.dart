@@ -1,3 +1,4 @@
+import "package:com_noopeshop_backend/components/forms/inputs/select/select_input_form_component.dart";
 import "package:com_noopeshop_backend/components/forms/inputs/text/text_input_form_component.dart";
 import "package:com_noopeshop_backend/components/forms/inputs/textarea/textarea_input_forms_component.dart";
 import "package:com_noopeshop_backend/components/pages/bloc/wrapper_page_bloc.dart";
@@ -88,19 +89,59 @@ class _EditScreenState extends State<EditScreen> {
               ],
             ),
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextInputFormComponent(
-                    controller: _nameController,
-                    label: "Name",
+                  Expanded(
+                    flex: 4,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        TextInputFormComponent(
+                          controller: _nameController,
+                          label: "Name",
+                        ),
+                        const SizedBox(
+                          height: kDefaultPadding,
+                        ),
+                        TextareaInputFormComponent(
+                          controller: _descriptionController,
+                          label: "Description",
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(
-                    height: kDefaultPadding,
-                  ),
-                  TextareaInputFormComponent(
-                    controller: _descriptionController,
-                    label: "Description",
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(
+                        kDefaultPadding,
+                      ),
+                      child: Column(
+                        children: const [
+                          SelectInputFormComponent(
+                            itemSelected: [
+                              {
+                                "uid": "1",
+                              }
+                            ],
+                            items: [
+                              {
+                                "uid": "1",
+                                "name": "Cat 1",
+                                "selected": false,
+                              },
+                              {
+                                "uid": "2",
+                                "name": "Cate 2",
+                                "selected": false,
+                              },
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
