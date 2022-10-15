@@ -35,6 +35,8 @@ class CategoryRepository {
 
     final List<CategoryModel> categories = [];
 
+    info("Categories loaded");
+
     return queryResult.data!["categories"].map<CategoryModel>(
       (dynamic category) {
         categories.add(
@@ -96,7 +98,57 @@ class CategoryRepository {
     );
   }
 
-  Future<void> update(Map<String, dynamic> data) async {}
+  Future<void> update(Map<String, dynamic> data) async {
+    info(
+      "Updating category",
+      data: data,
+    );
+
+    QueryResult result = await graphQLRepository.mutate(
+      r"""
+        mutation($categoryInput: CategoryInput!) {
+            updateCategory(categoryInput: $categoryInput) {
+                __typename
+                ... on Category {
+                    uid
+                    name,
+                    description
+                }
+                ... on CategoryNotFoundError {
+                    code
+                }
+            }
+        }
+      """,
+      variables: {
+        "categoryInput": {
+          "uid": data["uid"],
+          "name": data["name"],
+          "description": data["description"],
+        },
+      },
+    );
+
+    if (result.hasException) {
+      throw StandardException(
+        code: "unknown",
+        message: result.exception.toString(),
+      );
+    }
+
+    if (result.data!["updateCategory"]["__typename"] ==
+        "CategoryNotFoundError") {
+      throw StandardException(
+        code: result.data!["updateCategory"]["code"],
+        message: "Category not found",
+      );
+    }
+
+    info(
+      "Category updated",
+      data: result.data!["updateCategory"],
+    );
+  }
 
   Future<void> createOrUpdate(Map<String, dynamic> data) async {}
 

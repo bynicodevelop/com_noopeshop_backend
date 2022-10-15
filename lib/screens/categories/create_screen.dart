@@ -72,6 +72,9 @@ class _CategoriesCreateScreenState extends State<CategoriesCreateScreen> {
               controller: _nameController,
               label: "Name",
             ),
+            const SizedBox(
+              height: kDefaultPadding,
+            ),
             TextareaInputFormComponent(
               controller: _descriptionController,
               label: "Description",

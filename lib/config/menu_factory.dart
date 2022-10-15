@@ -1,5 +1,6 @@
 import "package:com_noopeshop_backend/components/pages/wrapper_page_component.dart";
 import "package:com_noopeshop_backend/screens/categories/create_screen.dart";
+import "package:com_noopeshop_backend/screens/categories/edit_screen.dart";
 import "package:com_noopeshop_backend/screens/categories/list_screen.dart";
 import "package:com_noopeshop_backend/screens/products/edit_screen.dart";
 import "package:com_noopeshop_backend/screens/products/list_screen.dart";
@@ -24,7 +25,7 @@ final menuFactory = [
     "screen": const WrapperPageComponent(
       list: CategoriesListScreen(),
       create: CategoriesCreateScreen(),
-      edit: EditScreen(),
+      edit: CategoriesEditScreen(),
     ),
     "default": true,
   },

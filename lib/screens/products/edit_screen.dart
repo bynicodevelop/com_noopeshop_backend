@@ -32,9 +32,8 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<WrapperPageBloc, WrapperPageState>(
       builder: (context, state) {
-        print("EditScreen: state: ${(state as WrapperPageInitialState).model}");
         ProductModel productModel = ProductModel.fromJson(
-          (state).model,
+          (state as WrapperPageInitialState).model,
         );
 
         _nameController.text = productModel.name;

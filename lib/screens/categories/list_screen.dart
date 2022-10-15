@@ -33,6 +33,8 @@ class CategoriesListScreen extends StatelessWidget {
                 bloc: context.read<ListCategoriesBloc>()
                   ..add(OnListCategoriesEvent()),
                 builder: (BuildContext context, state) {
+                  print(state);
+
                   if (state is ListCategoriesLoadingState ||
                       state is ListCategoriesInitialState) {
                     return const Center(

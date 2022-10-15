@@ -4,10 +4,19 @@ class GraphQLRepository {
   late GraphQLClient _client;
 
   GraphQLRepository() {
+    final Policies policies = Policies(
+      fetch: FetchPolicy.networkOnly,
+    );
+
     _client = GraphQLClient(
       cache: GraphQLCache(),
       link: HttpLink(
         "http://localhost:5001/e-commerce-empire/us-central1/api",
+      ),
+      defaultPolicies: DefaultPolicies(
+        watchQuery: policies,
+        query: policies,
+        mutate: policies,
       ),
     );
   }

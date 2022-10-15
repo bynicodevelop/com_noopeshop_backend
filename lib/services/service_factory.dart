@@ -3,6 +3,7 @@ import "package:com_noopeshop_backend/repositories/category_repository.dart";
 import "package:com_noopeshop_backend/repositories/product_repository.dart";
 import "package:com_noopeshop_backend/services/categories/create_category/create_category_bloc.dart";
 import "package:com_noopeshop_backend/services/categories/list_categories/list_categories_bloc.dart";
+import "package:com_noopeshop_backend/services/categories/update_categories/update_categories_bloc.dart";
 import "package:com_noopeshop_backend/services/menu/click_menu/click_menu_bloc.dart";
 import "package:com_noopeshop_backend/services/products/edit_product/edit_product_bloc.dart";
 import "package:com_noopeshop_backend/services/products/import_aliexpress_product/import_aliexpress_product_bloc.dart";
@@ -59,6 +60,11 @@ class ServiceFactory extends StatelessWidget {
         ),
         BlocProvider<ListCategoriesBloc>(
           create: (context) => ListCategoriesBloc(
+            categoryRepository,
+          ),
+        ),
+        BlocProvider<EditCategoriesBloc>(
+          create: (context) => EditCategoriesBloc(
             categoryRepository,
           ),
         ),

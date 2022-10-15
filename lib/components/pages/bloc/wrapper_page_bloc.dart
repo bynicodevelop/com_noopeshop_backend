@@ -15,9 +15,7 @@ const Map<String, dynamic> pages = {
 class WrapperPageBloc extends Bloc<WrapperPageEvent, WrapperPageState> {
   WrapperPageBloc() : super(const WrapperPageInitialState()) {
     on<OnWrapperPageEvent>((event, emit) {
-      info(
-        "OnWrapperPageEvent",
-      );
+      info("OnWrapperPageEvent");
 
       emit(WrapperPageInitialState(
         model: event.model,
